@@ -1,0 +1,699 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Consolidated from franka_parameters.xacro. -->
+  <!-- Frozen Franka 2.8.1 parameters; source paths and hashes: docs/urdf.md. -->
+  <xacro:property name="fr3_duo_mount_kinematics" value="${dict(fr3_duo_mount_origin=dict(kinematic=dict(x=0.0, y=0.0, z=0.0, roll=0.0, pitch=0.0, yaw=0.0)), fr3_duo_mount_mounting_point=dict(kinematic=dict(x=-0.037, y=0.0, z=-0.05, roll=0.0, pitch=0.0, yaw=0.0)), fr3_duo_mount_left=dict(kinematic=dict(x=0.0, y=0.05018, z=0.0, roll=-0.89334809, pitch=-0.17456074, yaw=-0.46334506)), fr3_duo_mount_right=dict(kinematic=dict(x=0.0, y=-0.05018, z=0.0, roll=0.89334809, pitch=-0.17456074, yaw=0.46334506)))}"/>
+  <xacro:property name="fr3_duo_mount_inertials" value="${dict(mount=dict(origin=dict(xyz='-0.011817 -0.00005 0.044431', rpy='0 0 0'), mass=4.093846, inertia=dict(xx=0.0224318121, xy=1.38076e-06, xz=-0.0015719371, yy=0.0164193182, yz=-1.442621e-06, zz=0.0217407036)))}"/>
+  <xacro:property name="franka_head_kinematics" value="${dict(head=dict(kinematic=dict(x=0.0, y=0.0, z=0.167, roll=0.0, pitch=0.0, yaw=0.0)), head_camera_mounting_point=dict(kinematic=dict(x=0.042463788936189344, y=-0.014113, z=0.22352590079539492, roll=0.0, pitch=0.7156, yaw=0.0)))}"/>
+  <xacro:property name="franka_head_inertials" value="${dict(head=dict(origin=dict(xyz='0 0 0', rpy='0 0 0'), mass=0.350865, inertia=dict(xx=0.003020352, xy=-2.194e-05, xz=0.00016159, yy=0.003067069, yz=-5.8102e-05, zz=0.000160526)), head_camera_mounting_point=dict(origin=dict(xyz='0 0 0', rpy='0 0 0'), mass=0.001, inertia=dict(xx=1e-07, xy=0.0, xz=0.0, yy=1e-07, yz=0.0, zz=1e-07)))}"/>
+  <xacro:property name="franka_spine_kinematics" value="${dict(franka_spine_fixed_joint=dict(kinematic=dict(x=0.138289, y=0.0, z=0.35, roll=0.0, pitch=0.0, yaw=0.0)), franka_spine_vertical_joint=dict(kinematic=dict(x=0.266711, y=0.0, z=0.1, roll=0.0, pitch=0.0, yaw=0.0)))}"/>
+  <xacro:property name="franka_spine_inertials" value="${dict(franka_spine=dict(origin=dict(xyz='0.042358 0.000378 0.495198', rpy='0 0 0'), mass=21.909124, inertia=dict(xx=3.338968145, xy=-0.000642887, xz=0.299962762, yy=3.324560297, yz=-0.004488422, zz=0.281489258)), franka_spine_mounting_point=dict(origin=dict(xyz='0 0 0', rpy='0 0 0'), mass=0.01, inertia=dict(xx=0.0001, xy=0.0, xz=0.0, yy=0.0001, yz=0.0, zz=0.0001)))}"/>
+  <xacro:property name="franka_hand_inertials" value="${dict(hand=dict(origin=dict(xyz='-0.0000376 0.0119128 0.0207260', rpy='0 0 0'), mass=0.6544, inertia=dict(xx=0.00186, yy=0.0003, zz=0.00174, xy=0.0, xz=0.0, yz=-2e-05)), leftfinger=dict(origin=dict(xyz='0 0.0152850 0.0219675', rpy='0 0 0'), mass=0.0291, inertia=dict(xx=8.49e-06, yy=8.53e-06, zz=1.77e-06, xy=0.0, xz=0.0, yz=-1.06e-06)), rightfinger=dict(origin=dict(xyz='0 0.0152850 0.0219675', rpy='0 0 0'), mass=0.0291, inertia=dict(xx=8.49e-06, yy=8.53e-06, zz=1.77e-06, xy=0.0, xz=0.0, yz=-1.06e-06)))}"/>
+  <xacro:property name="fr3v2_1_accelerometers" value="${dict(link0=dict(accelerometer_top=dict(x=-0.017402, y=-0.007872, z=0.04715, roll=3.1416, pitch=0.0, yaw=0.0), accelerometer_bottom=dict(x=-0.019739, y=0.0015506, z=0.05075, roll=0.0, pitch=0.0, yaw=-1.5708)), link1=dict(accelerometer_top=dict(x=0.017402, y=-0.093352, z=-0.00787, roll=-1.5708, pitch=0.0, yaw=3.1416), accelerometer_bottom=dict(x=0.01974, y=-0.08975, z=0.00155, roll=-1.5708, pitch=1.5708, yaw=0.0)), link2=dict(accelerometer_top=dict(x=0.017403, y=-0.11515, z=0.00787, roll=1.5708, pitch=0.0, yaw=3.1416), accelerometer_bottom=dict(x=0.019737, y=-0.11875, z=-0.00155, roll=1.5708, pitch=-1.5708, yaw=0.0)), link3=dict(accelerometer_top=dict(x=0.065099, y=0.077352, z=-0.00787, roll=-1.5708, pitch=0.0, yaw=0.0), accelerometer_bottom=dict(x=0.062769, y=0.073756, z=0.00155, roll=1.5708, pitch=1.5708, yaw=0.0)), link4=dict(accelerometer_top=dict(x=-0.0651, y=0.046152, z=-0.00787, roll=-1.5708, pitch=0.0, yaw=-3.1416), accelerometer_bottom=dict(x=-0.062775, y=0.049753, z=0.00155, roll=-1.5708, pitch=1.5708, yaw=0.0)), link5=dict(accelerometer_top=dict(x=-0.017363, y=0.085872, z=-0.00795, roll=-1.5708, pitch=0.0, yaw=0.0), accelerometer_bottom=dict(x=-0.019742, y=0.082275, z=0.00146, roll=1.5708, pitch=1.5708, yaw=0.0)))}"/>
+  <xacro:property name="fr3v2_1_dynamics" value="${dict(joint1=dict(dynamic=dict(D=1, K=7000, damping=0.003, friction=0.2, mu_coulomb=0, mu_viscous=16, motor_inertia=4.206399e-05, gear_ratio=120.0)), joint2=dict(dynamic=dict(D=1, K=7000, damping=0.003, friction=0.2, mu_coulomb=0, mu_viscous=16, motor_inertia=4.206399e-05, gear_ratio=120.0)), joint3=dict(dynamic=dict(D=1, K=7000, damping=0.003, friction=0.2, mu_coulomb=0, mu_viscous=16, motor_inertia=3.211626e-05, gear_ratio=120.0)), joint4=dict(dynamic=dict(D=1, K=7000, damping=0.003, friction=0.2, mu_coulomb=0, mu_viscous=16, motor_inertia=3.211626e-05, gear_ratio=120.0)), joint5=dict(dynamic=dict(D=1, K=7000, damping=0.003, friction=0.2, mu_coulomb=0, mu_viscous=16, motor_inertia=3.211626e-05, gear_ratio=80.0)), joint6=dict(dynamic=dict(D=1, K=7000, damping=0.003, friction=0.2, mu_coulomb=0, mu_viscous=16, motor_inertia=3.211626e-05, gear_ratio=80.0)), joint7=dict(dynamic=dict(D=1, K=7000, damping=0.003, friction=0.2, mu_coulomb=0, mu_viscous=16, motor_inertia=3.211626e-05, gear_ratio=80.0)))}"/>
+  <xacro:property name="fr3v2_1_inertials" value="${dict(link0=dict(origin=dict(xyz='-0.017200 0.000400 0.074500', rpy='0 0 0'), mass=2.3966, inertia=dict(xx=0.009, xy=0.0, xz=0.002, yy=0.0115, yz=0.0, zz=0.0085)), link1=dict(origin=dict(xyz='-0.004580 0.027016 -0.061800', rpy='0 0 0'), mass=2.4377, inertia=dict(xx=0.02324, xy=0.000333, xz=-0.000676, yy=0.02146, yz=0.003739, zz=0.0055)), link2=dict(origin=dict(xyz='-0.010630 -0.184739 -0.010479', rpy='0 0 0'), mass=2.2375, inertia=dict(xx=0.019026, xy=0.001241, xz=0.000499, yy=0.00566, yz=-0.001804, zz=0.017114)), link3=dict(origin=dict(xyz='0.091995 0.023003 0.047348', rpy='0 0 0'), mass=2.196382, inertia=dict(xx=0.010225, xy=0.001144, xz=0.003497, yy=0.012398, yz=0.002156, zz=0.006877)), link4=dict(origin=dict(xyz='-0.084334 0.096836 0.006248', rpy='0 0 0'), mass=2.186422, inertia=dict(xx=0.008878, xy=-0.003749, xz=0.001139, yy=0.007628, yz=-0.00046, zz=0.010295)), link5=dict(origin=dict(xyz='0.000039 0.011821 -0.054936', rpy='0 0 0'), mass=2.190783, inertia=dict(xx=0.031874, xy=0.000134, xz=-0.000265, yy=0.029674, yz=-0.004734, zz=0.004751)), link6=dict(origin=dict(xyz='0.069627 -0.016716 -0.037235', rpy='0 0 0'), mass=1.583583, inertia=dict(xx=0.00286, xy=-0.000553, xz=-0.000638, yy=0.00391, yz=-0.00024, zz=0.00453)), link7=dict(origin=dict(xyz='-0.014555 0.009230 0.065858', rpy='0 0 0'), mass=0.698686, inertia=dict(xx=0.000899, xy=0.0, xz=-1.3e-05, yy=0.001099, yz=-2.2e-05, zz=0.000702)))}"/>
+  <xacro:property name="fr3v2_1_joint_limits" value="${dict(joint1=dict(limit=dict(lower=-2.9007400166666666, upper=2.9007400166666666, velocity=2.62, effort=87.0), position_based_velocity_limits=dict(velocity_offset=0.6520000381679385, deceleration_limit=6.0)), joint2=dict(limit=dict(lower=-1.8360900166666667, upper=1.8360900166666667, velocity=2.62, effort=87.0), position_based_velocity_limits=dict(velocity_offset=0.2499685851463105, deceleration_limit=2.585)), joint3=dict(limit=dict(lower=-2.9007400166666666, upper=2.9007400166666666, velocity=2.62, effort=87.0), position_based_velocity_limits=dict(velocity_offset=0.20053055661577582, deceleration_limit=3.5)), joint4=dict(limit=dict(lower=-3.077020016666667, upper=-0.11693708333333333, velocity=2.62, effort=87.0), position_based_velocity_limits=dict(velocity_offset=0.3542181933842238, deceleration_limit=4.0)), joint5=dict(limit=dict(lower=-2.87630335, upper=2.87630335, velocity=5.26, effort=12.0), position_based_velocity_limits=dict(velocity_offset=0.5738321197718637, deceleration_limit=17.0)), joint6=dict(limit=dict(lower=0.43982265, upper=4.62163335, velocity=4.18, effort=12.0), position_based_velocity_limits=dict(velocity_offset=0.4884649342105264, deceleration_limit=5.5)), joint7=dict(limit=dict(lower=-3.05083335, upper=3.05083335, velocity=5.26, effort=12.0), position_based_velocity_limits=dict(velocity_offset=0.4591952376425851, deceleration_limit=17.0)))}"/>
+  <xacro:property name="fr3v2_1_kinematics" value="${dict(joint1=dict(kinematic=dict(x=0, y=0, z=0.333, roll=0, pitch=0, yaw=0)), joint2=dict(kinematic=dict(x=0, y=0, z=0, roll=-1.570796326794897, pitch=0, yaw=0)), joint3=dict(kinematic=dict(x=0, y=-0.316, z=0, roll=1.570796326794897, pitch=0, yaw=0)), joint4=dict(kinematic=dict(x=0.0825, y=0, z=0, roll=1.570796326794897, pitch=0, yaw=0)), joint5=dict(kinematic=dict(x=-0.0825, y=0.384, z=0, roll=-1.570796326794897, pitch=0, yaw=0)), joint6=dict(kinematic=dict(x=0, y=0, z=0, roll=1.570796326794897, pitch=0, yaw=0)), joint7=dict(kinematic=dict(x=0.088, y=0, z=0, roll=1.570796326794897, pitch=0, yaw=0)), joint8=dict(kinematic=dict(x=0, y=0, z=0.107, roll=0, pitch=0, yaw=0)))}"/>
+
+  <!-- Consolidated from franka_robot_utils.xacro. -->
+
+  <!-- ============================================================== -->
+  <!-- Macro to add an <inertial> tag based on yaml-load properties   -->
+  <!--                                                                -->
+  <!-- name:     Name of the robot link (without prefix)              -->
+  <!-- inertial: Dictionary of inertia properties (see frozen parameter data) -->
+  <!-- ============================================================== -->
+  <xacro:macro name="franka-inertials" params="name inertials:=^">
+      <xacro:unless value="${name in inertials}">${xacro.warning('No inertia properties defined for: ' + name)}</xacro:unless>
+      <xacro:if value="${name in inertials}">
+        <!-- Access inertia properties of link 'name' -->
+        <xacro:property name="link_inertials" value="${inertials[name]}" lazy_eval="false" />
+        <inertial>
+          <origin rpy="${link_inertials['origin']['rpy']}" xyz="${link_inertials['origin']['xyz']}" />
+          <mass value="${link_inertials['mass']}" />
+          <xacro:if value="${'inertia' in link_inertials}">
+            <xacro:property name="I" value="${link_inertials['inertia']}" />
+            <inertia ixx="${I['xx']}" ixy="${I['xy']}" ixz="${I['xz']}" iyy="${I['yy']}" iyz="${I['yz']}" izz="${I['zz']}" />
+          </xacro:if>
+        </inertial>
+      </xacro:if>
+  </xacro:macro>
+
+  <!-- ========================================================== -->
+  <!-- Macro to add a single link, both with                      -->
+  <!--  * detailed meshes for environmental collision checking    -->
+  <!--  * and coarse geometry models for self-collision checking  -->
+  <!--    (only if 'gazebo' param is set)                         -->
+  <!--                                                            -->
+  <!-- name:  Name of the robot link (without prefix)             -->
+  <!-- rpy:   Rotation of the *_sc link relative to parent [rad]  -->
+  <!-- self_collision_geometries:  self <collision> models        -->
+  <!-- ========================================================== -->
+  <xacro:macro name="link_with_sc" params="name no_prefix:='false' rpy:='0 0 0' **self_collision_geometries gazebo:=false with_sc:=false with_accelerometers:=false">
+    <xacro:property name="prefix" value="${'' if no_prefix else arm_prefix + robot_type + '_'}" />
+    <!-- sub-link defining detailed meshes for collision with environment -->
+    <link name="${prefix}${name}">
+      <visual name="${prefix}${name}_visual">
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_fr3/visual/${name}.dae" />
+        </geometry>
+      </visual>
+      <collision name="${prefix}${name}_collision">
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_fr3/collision/${name}.stl" />
+        </geometry>
+      </collision>
+      <xacro:franka-inertials name="${name}" />
+    </link>
+
+    <!-- sub-link defining coarse geometries of real robot's internal self-collision -->
+    <xacro:if value="${with_sc}">
+      <link name="${prefix}${name}_sc">
+        <xacro:unless value="${gazebo}">
+          <xacro:insert_block name="self_collision_geometries" />
+        </xacro:unless>
+      </link>
+      <!-- fixed joint between both sub-links -->
+      <joint name="${prefix}${name}_sc_joint" type="fixed">
+        <origin rpy="${rpy}" />
+        <parent link="${prefix}${name}" />
+        <child link="${prefix}${name}_sc" />
+      </joint>
+    </xacro:if>
+
+    <xacro:if value="${with_accelerometers}">
+      <xacro:franka-accelerometers prefix="${prefix}" name="${name}" config="${accelerometer_config}" />
+    </xacro:if>
+
+
+  </xacro:macro>
+
+  <!-- =========================================================== -->
+  <!-- Add a <collision> tag with a capsule, made from a cylinder  -->
+  <!-- with two spheres at its caps. The capsule will always be    -->
+  <!-- aligned with the axis of 'direction' you pass along.        -->
+  <!--                                                             -->
+  <!-- radius: Radii of both the cylinder and both spheres [m]     -->
+  <!-- length: Length of the cylinder/distance between the centers -->
+  <!--         of the spheres. NOT overall length of capsule!      -->
+  <!-- xyz:    Position of the center of the capsule/cylinder      -->
+  <!-- direction: One of { x, y, z, -x, -y, -z }                   -->
+  <!-- =========================================================== -->
+  <xacro:macro name="collision_capsule" params="radius length xyz:='0 0 0' direction:='z'">
+    <xacro:property name="r" value="${pi/2.0 if 'y' in direction else 0}" />
+    <xacro:property name="p" value="${pi/2.0 if 'x' in direction else 0}" />
+    <xacro:property name="y" value="0" />
+    <xacro:property name="x" value="${xyz.split(' ')[0]}" />
+    <xacro:property name="y" value="${xyz.split(' ')[1]}" />
+    <xacro:property name="z" value="${xyz.split(' ')[2]}" />
+    <!-- Sphere center offsets from center of cylinder -->
+    <xacro:property name="sx" value="${length / 2.0 if 'x' in direction else 0}" />
+    <xacro:property name="sy" value="${length / 2.0 if 'y' in direction else 0}" />
+    <xacro:property name="sz" value="${length / 2.0 if 'z' in direction else 0}" />
+
+    <collision>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${y}"/>
+      <geometry>
+        <cylinder radius="${radius}" length="${length}" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="${x+sx} ${y+sy} ${z+sz}" />
+      <geometry>
+        <sphere radius="${radius}" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="${x-sx} ${y-sy} ${z-sz}" />
+      <geometry>
+        <sphere radius="${radius}" />
+      </geometry>
+    </collision>
+  </xacro:macro>
+
+  <!-- ========================================================== -->
+  <!-- Adds the required tags to simulate one joint in gazebo     -->
+  <!--                                                            -->
+  <!-- joint - Name of the fer joint to simulate                  -->
+  <!-- transmission - type of the transmission of the joint       -->
+  <!-- ========================================================== -->
+  <xacro:macro name="gazebo-joint" params="joint transmission:=hardware_interface/EffortJointInterface">
+    <gazebo reference="${joint}">
+      <!-- Needed for ODE to output external wrenches on joints -->
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <transmission name="${joint}_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint}">
+        <hardwareInterface>${transmission}</hardwareInterface>
+      </joint>
+      <actuator name="${joint}_motor">
+        <hardwareInterface>${transmission}</hardwareInterface>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:macro name="gazebo-friction" params="link mu">
+    <gazebo reference="${link}">
+      <collision>
+        <max_contacts>10</max_contacts>
+        <surface>
+          <contact>
+            <ode>
+              <!-- These two parameter need application specific tuning. -->
+              <!-- Usually you want no "snap out" velocity and a generous -->
+              <!-- penetration depth to keep the grasping stable -->
+              <max_vel>0</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>${mu}</mu>
+              <mu2>${mu}</mu2>
+            </ode>
+          </friction>
+          <bounce/>
+        </surface>
+      </collision>
+    </gazebo>
+  </xacro:macro>
+
+  <!-- ========================================================== -->
+  <!-- Adds the required tags to provide a `FrankaStateInterface` -->
+  <!-- when simulating with franka_hw_sim plugin                  -->
+  <!--                                                            -->
+  <!-- robot_type - Arm ID of the fer to simulate (default 'fer')     -->
+  <!-- ========================================================== -->
+  <xacro:macro name="transmission-franka-state" params="robot_type:=fer">
+    <transmission name="${arm_prefix}${robot_type}_franka_state">
+      <type>franka_hw/FrankaStateInterface</type>
+      <joint name="${arm_prefix}${robot_type}_joint1"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></joint>
+      <joint name="${arm_prefix}${robot_type}_joint2"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></joint>
+      <joint name="${arm_prefix}${robot_type}_joint3"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></joint>
+      <joint name="${arm_prefix}${robot_type}_joint4"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></joint>
+      <joint name="${arm_prefix}${robot_type}_joint5"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></joint>
+      <joint name="${arm_prefix}${robot_type}_joint6"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></joint>
+      <joint name="${arm_prefix}${robot_type}_joint7"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></joint>
+
+      <actuator name="${arm_prefix}${robot_type}_motor1"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
+      <actuator name="${arm_prefix}${robot_type}_motor2"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
+      <actuator name="${arm_prefix}${robot_type}_motor3"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
+      <actuator name="${arm_prefix}${robot_type}_motor4"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
+      <actuator name="${arm_prefix}${robot_type}_motor5"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
+      <actuator name="${arm_prefix}${robot_type}_motor6"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
+      <actuator name="${arm_prefix}${robot_type}_motor7"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
+    </transmission>
+  </xacro:macro>
+
+  <!-- ============================================================ -->
+  <!-- Adds the required tags to provide a `FrankaModelInterface`   -->
+  <!-- when simulating with franka_hw_sim plugin                    -->
+  <!--                                                              -->
+  <!-- robot_type - Arm ID of the fer to simulate (default 'fer')       -->
+  <!-- root   - Joint name of the base of the robot                 -->
+  <!-- tip    - Joint name of the tip of the robot (flange or hand) -->
+  <!-- ============================================================ -->
+  <xacro:macro name="transmission-franka-model" params="robot_type:=fer root:=fer_joint1 tip:=fer_joint7">
+    <transmission name="${arm_prefix}${robot_type}_franka_model">
+      <type>franka_hw/FrankaModelInterface</type>
+      <joint name="${root}">
+        <role>root</role>
+        <hardwareInterface>franka_hw/FrankaModelInterface</hardwareInterface>
+      </joint>
+      <joint name="${tip}">
+        <role>tip</role>
+        <hardwareInterface>franka_hw/FrankaModelInterface</hardwareInterface>
+      </joint>
+
+      <actuator name="${root}_motor_root"><hardwareInterface>franka_hw/FrankaModelInterface</hardwareInterface></actuator>
+      <actuator name="${tip}_motor_tip"  ><hardwareInterface>franka_hw/FrankaModelInterface</hardwareInterface></actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:macro name="inertia-cylinder" params="mass radius h">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${1./12 * mass * (3 * radius**2 + h**2)}" ixy = "0" ixz = "0"
+               iyy="${1./12 * mass * (3 * radius**2 + h**2)}" iyz = "0"
+               izz="${1./2  * mass * radius**2}" />
+    </inertial>
+  </xacro:macro>
+
+  <!-- ========================================================================= -->
+  <!-- Adds the <limit ... /> & <safety_controller/> tags given a config file    -->
+  <!-- of joint limits                                                           -->
+  <!--                                                                           -->
+  <!-- config - frozen parameter struct defining joint limits (e.g. fer/joint_limits.yaml)   -->
+  <!-- name   - Name of the joint for which to add limits to                     -->
+  <!-- ========================================================================= -->
+  <xacro:macro name="franka-limits" params="config name">
+      <xacro:property name="limits" value="${config[name]['limit']}" lazy_eval="false" />
+      <limit lower="${limits['lower']}"
+             upper="${limits['upper']}"
+             effort="${limits['effort']}"
+             velocity="${limits['velocity']}" />
+      <safety_controller k_position="100.0"
+                         k_velocity="40.0"
+                         soft_lower_limit="${limits['lower']}"
+                         soft_upper_limit="${limits['upper']}" />
+      
+      <!-- Add position-based velocity limits if they exist -->
+      <xacro:if value="${'position_based_velocity_limits' in config[name]}">
+        <xacro:property name="position_based_velocity_limits" value="${config[name]['position_based_velocity_limits']}" lazy_eval="false" />
+        <position_based_velocity_limits velocity_offset="${position_based_velocity_limits['velocity_offset']}" deceleration_limit="${position_based_velocity_limits['deceleration_limit']}" />
+      </xacro:if>
+  </xacro:macro>
+
+  <!-- ========================================================================= -->
+  <!-- Adds the <dynamics ... /> tag given a config file of joint dynamics       -->
+  <!--                                                                           -->
+  <!-- config - frozen parameter struct defining joint dynamics (e.g. fer/dynamics.yaml)     -->
+  <!-- name   - Name of the joint for which to add dynamics to                   -->
+  <!-- ========================================================================= -->
+  <xacro:macro name="franka-dynamics" params="config name">
+      <xacro:property name="dynamics" value="${config[name]['dynamic']}" lazy_eval="false" />
+      <dynamics D="${dynamics['D']}"
+             K="${dynamics['K']}"
+             damping="${dynamics['damping']}"
+             friction="${dynamics['friction']}"
+             mu_coulomb="${dynamics['mu_coulomb']}"
+             mu_viscous="${dynamics['mu_viscous']}"
+             motor_inertia="${dynamics['motor_inertia']}"
+             gear_ratio="${dynamics['gear_ratio']}" />
+  </xacro:macro>
+
+  <!-- ========================================================================= -->
+  <!-- Adds the <kinematics ... /> tag given a config file of joint kinematics   -->
+  <!--                                                                           -->
+  <!-- config - frozen parameter struct defining joint kinematics (e.g. fer/kinematics.yaml) -->
+  <!-- name   - Name of the joint for which to add kinematics to                 -->
+  <!-- ========================================================================= -->
+  <xacro:macro name="franka-kinematics" params="config name">
+      <xacro:property name="kinematics" value="${config[name]['kinematic']}" lazy_eval="false" />
+      <origin rpy="${kinematics['roll']} ${kinematics['pitch']} ${kinematics['yaw']}"
+             xyz="${kinematics['x']} ${kinematics['y']} ${kinematics['z']}" />
+  </xacro:macro>
+
+  <!-- ================================================================================== -->
+  <!-- Adds the accelerometer frames given a config file of link accelerometers           -->
+  <!--                                                                                    -->
+  <!-- name   - Name of the link for which to add accelerometers to                       -->
+  <!-- prefix - Prefix to name                                                            -->
+  <!-- config - frozen parameter struct defining link accelerometers (e.g. fr3v2/accelerometers.yaml) -->
+  <!-- ================================================================================== -->
+  <xacro:macro name="franka-accelerometers" params="name prefix config">
+      <xacro:property name="accelerometer_top" value="${config[name]['accelerometer_top']}" lazy_eval="false" />
+      <xacro:property name="accelerometer_bottom" value="${config[name]['accelerometer_bottom']}" lazy_eval="false" />
+
+      <link name="${prefix}${name}_accelerometer_top">
+      </link>
+      <joint name="${prefix}${name}_accelerometer_top_joint" type="fixed">
+        <origin rpy="${accelerometer_top['roll']} ${accelerometer_top['pitch']} ${accelerometer_top['yaw']}"
+                xyz="${accelerometer_top['x']} ${accelerometer_top['y']} ${accelerometer_top['z']}" />
+        <parent link="${prefix}${name}" />
+        <child link="${prefix}${name}_accelerometer_top" />
+      </joint>
+
+      <link name="${prefix}${name}_accelerometer_bottom">
+      </link>
+      <joint name="${prefix}${name}_accelerometer_bottom_joint" type="fixed">
+        <origin rpy="${accelerometer_bottom['roll']} ${accelerometer_bottom['pitch']} ${accelerometer_bottom['yaw']}"
+                xyz="${accelerometer_bottom['x']} ${accelerometer_bottom['y']} ${accelerometer_bottom['z']}" />
+        <parent link="${prefix}${name}" />
+        <child link="${prefix}${name}_accelerometer_bottom" />
+      </joint>
+
+  </xacro:macro>
+
+  <!-- Consolidated from franka_arm.xacro. -->
+
+
+  <!-- safety_distance: Minimum safety distance in [m] by which the collision volumes are expanded and which is enforced during robot motions -->
+  <!-- robot_type: the franka robot arm type -->
+  <!-- FR3v2.1 parameters are frozen in franka_parameters.xacro. -->
+
+  <xacro:macro name="franka_arm" params="arm_prefix:='' no_prefix:=false description_pkg:='mfr3duo_description' connected_to:='base' xyz:='0 0 0' rpy:='0 0 0' gazebo:='false' safety_distance:=0 with_sc:=false" >
+
+    <xacro:property name="robot_type" value="fr3v2_1"/>
+    <xacro:property name="joint_limits" value="${fr3v2_1_joint_limits}"/>
+    <xacro:property name="inertials" value="${fr3v2_1_inertials}"/>
+    <xacro:property name="kinematics" value="${fr3v2_1_kinematics}"/>
+    <xacro:property name="accelerometer_config" value="${fr3v2_1_accelerometers}"/>
+    <xacro:property name="dynamics" value="${fr3v2_1_dynamics}"/>
+
+    <!-- Define a property that defaults to 'arm_prefix_robot_type' concatenated with an underscore if 'no_prefix' is not set -->
+    <xacro:property name="prefix" value="${'' if no_prefix else arm_prefix + robot_type + '_'}" />
+    <xacro:property name="with_accelerometers" value="${'false' if accelerometer_config == 'none' else 'true'}" />
+
+    <xacro:if value="${gazebo and connected_to == 'base'}">
+      <xacro:property name="connected_to" value="" />
+    </xacro:if>
+
+    <xacro:unless value="${not connected_to}">
+      <link name="${connected_to}">
+      </link>
+      <joint name="${prefix}${connected_to}_joint" type="fixed">
+        <parent link="${connected_to}"/>
+        <child link="${prefix}link0"/>
+        <origin rpy="${rpy}" xyz="${xyz}"/>
+      </joint>
+    </xacro:unless>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link0" gazebo="${gazebo}" with_sc="${with_sc}" with_accelerometers="${with_accelerometers}">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="-0.075 0 0.06" direction="x" radius="${0.06+safety_distance}" length="0.03" />
+      </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link1" gazebo="${gazebo}" with_sc="${with_sc}" with_accelerometers="${with_accelerometers}">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="0 0 -191.5e-3" radius="${0.06+safety_distance}" length="0.283" />
+      </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <joint name="${prefix}joint1" type="revolute">
+      <xacro:franka-kinematics name="joint1" config="${kinematics}" />
+      <parent link="${prefix}link0" />
+      <child link="${prefix}link1" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint1" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint1" config="${dynamics}" />
+    </joint>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link2" gazebo="${gazebo}" with_sc="${with_sc}" with_accelerometers="${with_accelerometers}">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="0 0 0" radius="${0.06+safety_distance}" length="0.12" />
+      </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <joint name="${prefix}joint2" type="revolute">
+      <xacro:franka-kinematics name="joint2" config="${kinematics}" />
+      <parent link="${prefix}link1" />
+      <child link="${prefix}link2" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint2" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint2" config="${dynamics}" />
+    </joint>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link3" gazebo="${gazebo}" with_sc="${with_sc}" with_accelerometers="${with_accelerometers}">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="0 0 -0.145" radius="${0.06+safety_distance}" length="0.15" />
+      </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <joint name="${prefix}joint3" type="revolute">
+      <xacro:franka-kinematics name="joint3" config="${kinematics}" />
+      <parent link="${prefix}link2" />
+      <child link="${prefix}link3" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint3" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint3" config="${dynamics}" />
+    </joint>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link4" gazebo="${gazebo}" with_sc="${with_sc}" with_accelerometers="${with_accelerometers}">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="0 0 0" radius="${0.06+safety_distance}" length="0.12" />
+     </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <joint name="${prefix}joint4" type="revolute">
+      <xacro:franka-kinematics name="joint4" config="${kinematics}" />
+      <parent link="${prefix}link3" />
+      <child link="${prefix}link4" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint4" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint4" config="${dynamics}" />
+    </joint>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link5" gazebo="${gazebo}" with_sc="${with_sc}" with_accelerometers="${with_accelerometers}">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="0 0 -0.26"    radius="${0.060+safety_distance}" length="0.10" />
+        <xacro:collision_capsule xyz="0 0.08 -0.13" radius="${0.025+safety_distance}" length="0.14" />
+      </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <joint name="${prefix}joint5" type="revolute">
+      <xacro:franka-kinematics name="joint5" config="${kinematics}" />
+      <parent link="${prefix}link4" />
+      <child link="${prefix}link5" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint5" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint5" config="${dynamics}" />
+    </joint>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link6" gazebo="${gazebo}" with_sc="${with_sc}" with_accelerometers="false">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="0 0 -0.03" radius="${0.05+safety_distance}" length="0.08" />
+      </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <joint name="${prefix}joint6" type="revolute">
+      <xacro:franka-kinematics name="joint6" config="${kinematics}" />
+      <parent link="${prefix}link5" />
+      <child link="${prefix}link6" />
+      <axis xyz="0 0 1" />
+      <xacro:franka-limits name="joint6" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint6" config="${dynamics}" />
+    </joint>
+
+    <xacro:link_with_sc no_prefix="${no_prefix}" name="link7" gazebo="${gazebo}" rpy="0 0 ${pi/4}" with_sc="${with_sc}" with_accelerometers="false">
+      <self_collision_geometries>
+        <xacro:collision_capsule xyz="0 0 0.01" direction="z" radius="${0.04+safety_distance}" length="0.14" />
+        <xacro:collision_capsule xyz="0.06 0 0.082" direction="x" radius="${0.03+safety_distance}"  length="0.01" />
+      </self_collision_geometries>
+    </xacro:link_with_sc>
+
+    <joint name="${prefix}joint7" type="revolute">
+      <xacro:franka-kinematics name="joint7" config="${kinematics}" />
+      <parent link="${prefix}link6"/>
+      <child link="${prefix}link7"/>
+      <axis xyz="0 0 1"/>
+      <xacro:franka-limits name="joint7" config="${joint_limits}" />
+      <xacro:franka-dynamics name="joint7" config="${dynamics}" />
+    </joint>
+
+    <link name="${prefix}link8"/>
+
+    <joint name="${prefix}joint8" type="fixed">
+      <xacro:franka-kinematics name="joint8" config="${kinematics}" />
+      <parent link="${prefix}link7" />
+      <child link="${prefix}link8" />
+    </joint>
+  </xacro:macro>
+
+  <!-- Consolidated from franka_robot.xacro. -->
+  <xacro:macro name="franka_robot"
+    params="                      parent:='world'
+                      xyz:='0 0 0'
+                      rpy:='0 0 0'
+                      xyz_ee:='0 0 0'
+                      rpy_ee:='0 0 0'
+                      tcp_xyz:='0 0 0'
+                      tcp_rpy:='0 0 0'
+                      safety_distance:='0.03'
+                      hand:='true'
+                      ee_id:=none
+                      special_connection:=''
+                      gazebo:='false'
+                      with_sc:='false'
+                      no_prefix:='false'
+                      arm_prefix:=''
+                      description_pkg:='mfr3duo_description'
+                      connected_to:='base'">
+
+    <xacro:property name="robot_type" value="fr3v2_1"/>
+    <xacro:franka_arm
+      arm_prefix="${arm_prefix}"
+      no_prefix="${no_prefix}"
+      xyz="${xyz}"
+      rpy="${rpy}"
+      safety_distance="0.03"
+      gazebo="${gazebo}"
+      with_sc="${with_sc}"
+      connected_to="${connected_to}"
+    />
+
+    <xacro:if value="${hand and ee_id== 'franka_hand'}">
+      <xacro:if value="${robot_type == 'fp3'}">
+        <xacro:property name="ee_color" value="black"/>
+      </xacro:if>
+      <xacro:if
+        value="${robot_type == 'fr3' or robot_type == 'fer' or robot_type == 'fr3v2' or robot_type == 'fr3v2_1'}">
+        <xacro:property name="ee_color" value="white"/>
+      </xacro:if>
+      <xacro:property name="connection"
+        value="${special_connection if special_connection != '' else robot_type + '_link8'}"/>
+      <xacro:franka_hand
+        connected_to="${arm_prefix}${connection}"
+        robot_type="fr3v2_1"
+        arm_prefix="${arm_prefix}"
+        ee_id="${ee_id}_${ee_color}"
+        ee_inertials="${franka_hand_inertials}"
+        rpy_ee="${rpy_ee}"
+        xyz_ee="${xyz_ee}"
+        tcp_xyz="${tcp_xyz}"
+        tcp_rpy="${tcp_rpy}"
+        safety_distance="${safety_distance}"
+        gazebo="${gazebo}"
+        description_pkg="${description_pkg}"
+        with_sc="${with_sc}"
+      />
+    </xacro:if>
+
+    <xacro:if value="${hand and ee_id != 'none' and ee_id != 'franka_hand'}">
+      <xacro:property name="connection"
+        value="${special_connection if special_connection != '' else robot_type + '_link8'}"/>
+      <xacro:ee_with_one_link
+        connected_to="${arm_prefix}${connection}"
+          arm_prefix="${arm_prefix}"
+        ee_id="${ee_id}"
+        ee_inertials="${franka_hand_inertials}"
+        rpy_ee="${rpy_ee}"
+        xyz_ee="${xyz_ee}"
+        tcp_xyz="${tcp_xyz}"
+        tcp_rpy="${tcp_rpy}"
+        safety_distance="${safety_distance}"
+        gazebo="${gazebo}"
+        description_pkg="${description_pkg}"
+        with_sc="${with_sc}"
+      />
+    </xacro:if>
+
+    <!-- Definition of additional Gazebo tags -->
+    <xacro:if value="${gazebo}">
+
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint1"
+        transmission="hardware_interface/PositionJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint2"
+        transmission="hardware_interface/PositionJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint3"
+        transmission="hardware_interface/PositionJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint4"
+        transmission="hardware_interface/PositionJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint5"
+        transmission="hardware_interface/PositionJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint6"
+        transmission="hardware_interface/PositionJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint7"
+        transmission="hardware_interface/PositionJointInterface"/>
+
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint1"
+        transmission="hardware_interface/VelocityJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint2"
+        transmission="hardware_interface/VelocityJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint3"
+        transmission="hardware_interface/VelocityJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint4"
+        transmission="hardware_interface/VelocityJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint5"
+        transmission="hardware_interface/VelocityJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint6"
+        transmission="hardware_interface/VelocityJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint7"
+        transmission="hardware_interface/VelocityJointInterface"/>
+
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint1"
+        transmission="hardware_interface/EffortJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint2"
+        transmission="hardware_interface/EffortJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint3"
+        transmission="hardware_interface/EffortJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint4"
+        transmission="hardware_interface/EffortJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint5"
+        transmission="hardware_interface/EffortJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint6"
+        transmission="hardware_interface/EffortJointInterface"/>
+      <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_joint7"
+        transmission="hardware_interface/EffortJointInterface"/>
+
+      <xacro:transmission-franka-state robot_type="${robot_type}"/>
+      <xacro:transmission-franka-model robot_type="${robot_type}"
+        root="${arm_prefix}${robot_type}_joint1"
+        tip="${arm_prefix}${robot_type}_joint8"
+      />
+
+      <xacro:if value="${ee_id == 'franka_hand'}">
+        <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_finger_joint1"
+          transmission="hardware_interface/EffortJointInterface"/>
+        <xacro:gazebo-joint joint="${arm_prefix}${robot_type}_finger_joint2"
+          transmission="hardware_interface/EffortJointInterface"/>
+        <!-- Friction specific material for Rubber/Rubber contact -->
+        <xacro:gazebo-friction link="${arm_prefix}${robot_type}_leftfinger" mu="1.13"/>
+        <xacro:gazebo-friction link="${arm_prefix}${robot_type}_rightfinger" mu="1.13"/>
+      </xacro:if>
+    </xacro:if>
+
+  </xacro:macro>
+
+  <!-- Consolidated from fr3_duo.xacro. -->
+  <xacro:macro
+    name="fr3_duo"
+    params="name
+            hand
+            ee_id
+            special_connection
+            xyz_ee
+            rpy_ee
+            tcp_xyz
+            tcp_rpy
+            safety_distance
+            with_sc
+            gazebo
+            description_pkg
+            base_mount
+            connected_to
+            arm_prefixes
+            no_prefix:=false
+            is_mfr3duo:=false">
+
+    <xacro:property name="arm_prefixes_list" value="${arm_prefixes}"/>
+
+    <xacro:mount
+      name="mount"
+      parent="${base_mount}"
+      left_prefix="${arm_prefixes_list[0]}"
+      right_prefix="${arm_prefixes_list[1]}">
+    </xacro:mount>
+
+    <xacro:head parent="fr3_duo_mount_mounting_point"/>
+
+    <xacro:property name="number_of_robots" value="2"/>
+    <xacro:macro name="fr3_duo_loop" params="i">
+      <xacro:unless value="${i == number_of_robots}">
+        <xacro:property name="robot_prefix" value="${arm_prefixes_list[i]}"/>
+        <xacro:property name="modified_prefix" value="${robot_prefix + '_' if robot_prefix else ''}"/>
+
+        <!-- Attach the robot arm to the mount -->
+        <joint name="${arm_prefixes_list[i]}_base_joint" type="fixed">
+          <parent link="fr3_duo_mount_${arm_prefixes_list[i]}"/>
+          <child link="${arm_prefixes_list[i]}_base"/>
+        </joint>
+
+        <!-- Spawn a fixed FR3v2.1 robot -->
+        <xacro:franka_robot
+          gazebo="${gazebo}"
+          hand="${hand}"
+          ee_id="${ee_id}"
+          special_connection="${special_connection}"
+          xyz_ee="${xyz_ee}"
+          rpy_ee="${rpy_ee}"
+          tcp_xyz="${tcp_xyz}"
+          tcp_rpy="${tcp_rpy}"
+          safety_distance="${safety_distance}"
+          with_sc="${with_sc}"
+          no_prefix="${no_prefix}"
+          arm_prefix="${modified_prefix}"
+          description_pkg="${description_pkg}"
+          connected_to="${arm_prefixes_list[i]}_base">
+        </xacro:franka_robot>
+        <xacro:fr3_duo_loop i="${i+1}"/>
+      </xacro:unless>
+    </xacro:macro>
+    <xacro:fr3_duo_loop i="0"/>
+
+  </xacro:macro>
+</robot>

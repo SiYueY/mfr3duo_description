@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Consolidated from fr3_duo_mount.xacro. -->
+  <xacro:property name="mount_kinematics"
+    value="${fr3_duo_mount_kinematics}"/>
+
+  <xacro:macro name="mount" params="name parent left_prefix right_prefix">
+    <xacro:property name="inertials"
+      value="${fr3_duo_mount_inertials}"/>
+    <link name="fr3_duo_mount_mounting_point">
+      <visual>
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_head/visual/fr3_duo_mount.dae"/>
+        </geometry>
+      </visual>
+      <visual>
+        <origin xyz="0 0 0.068"
+          rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_head/visual/fr3_duo_cover.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh
+            filename="package://mfr3duo_description/urdf/meshes/franka_head/collision/fr3_duo_mount.stl"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="0 0 0.068"
+          rpy="0 0 0"/>
+        <geometry>
+          <mesh
+            filename="package://mfr3duo_description/urdf/meshes/franka_head/collision/fr3_duo_cover.stl"/>
+        </geometry>
+      </collision>
+      <xacro:franka-inertials name="mount"/>
+    </link>
+
+    <link name="fr3_duo_mount_origin"/>
+
+    <joint name="fr3_duo_mount_origin_joint" type="fixed">
+      <parent link="fr3_duo_mount_mounting_point"/>
+      <child link="fr3_duo_mount_origin"/>
+      <origin
+        xyz="${-mount_kinematics['fr3_duo_mount_mounting_point']['kinematic']['x']} ${-mount_kinematics['fr3_duo_mount_mounting_point']['kinematic']['y']} ${-mount_kinematics['fr3_duo_mount_mounting_point']['kinematic']['z']}"
+        rpy="${-mount_kinematics['fr3_duo_mount_mounting_point']['kinematic']['roll']} ${-mount_kinematics['fr3_duo_mount_mounting_point']['kinematic']['pitch']} ${-mount_kinematics['fr3_duo_mount_mounting_point']['kinematic']['yaw']}"/>
+    </joint>
+
+    <!-- Mounting points for left and right robot -->
+    <link name="fr3_duo_mount_${left_prefix}"/>
+    <joint name="fr3_duo_mount_${left_prefix}_joint" type="fixed">
+      <parent link="fr3_duo_mount_origin"/>
+      <child link="fr3_duo_mount_${left_prefix}"/>
+      <origin
+        xyz="${mount_kinematics['fr3_duo_mount_left']['kinematic']['x']} ${mount_kinematics['fr3_duo_mount_left']['kinematic']['y']} ${mount_kinematics['fr3_duo_mount_left']['kinematic']['z']}"
+        rpy="${mount_kinematics['fr3_duo_mount_left']['kinematic']['roll']} ${mount_kinematics['fr3_duo_mount_left']['kinematic']['pitch']} ${mount_kinematics['fr3_duo_mount_left']['kinematic']['yaw']}"/>
+    </joint>
+    <link name="fr3_duo_mount_${right_prefix}">
+    </link>
+    <joint name="fr3_duo_mount_${right_prefix}_joint" type="fixed">
+      <parent link="fr3_duo_mount_origin"/>
+      <child link="fr3_duo_mount_${right_prefix}"/>
+      <origin
+        xyz="${mount_kinematics['fr3_duo_mount_right']['kinematic']['x']} ${mount_kinematics['fr3_duo_mount_right']['kinematic']['y']} ${mount_kinematics['fr3_duo_mount_right']['kinematic']['z']}"
+        rpy="${mount_kinematics['fr3_duo_mount_right']['kinematic']['roll']} ${mount_kinematics['fr3_duo_mount_right']['kinematic']['pitch']} ${mount_kinematics['fr3_duo_mount_right']['kinematic']['yaw']}"/>
+    </joint>
+
+    <!-- The mount fixing the duo mount to the parent link with the identity transform -->
+    <joint name="mount_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="fr3_duo_mount_mounting_point"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Consolidated from franka_head.xacro. -->
+  <xacro:property name="head_kinematics"
+    value="${franka_head_kinematics}"/>
+
+  <xacro:macro name="head" params="parent">
+    <xacro:property name="inertials"
+      value="${franka_head_inertials}"/>
+    <link name="head_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_head/visual/franka_head.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_head/collision/franka_head.stl"/>
+        </geometry>
+      </collision>
+      <xacro:franka-inertials name="head"/>
+    </link>
+
+    <joint name="head_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="head_link"/>
+      <origin
+        xyz="${head_kinematics['head']['kinematic']['x']} ${head_kinematics['head']['kinematic']['y']} ${head_kinematics['head']['kinematic']['z']}"
+        rpy="${head_kinematics['head']['kinematic']['roll']} ${head_kinematics['head']['kinematic']['pitch']} ${head_kinematics['head']['kinematic']['yaw']}"/>
+    </joint>
+
+    <link name="head_camera_mounting_point">
+      <xacro:franka-inertials name="head_camera_mounting_point"/>
+    </link>
+
+    <joint name="head_camera_mounting_point_joint" type="fixed">
+      <parent link="head_link"/>
+      <child link="head_camera_mounting_point"/>
+      <origin
+        xyz="${head_kinematics['head_camera_mounting_point']['kinematic']['x']} ${head_kinematics['head_camera_mounting_point']['kinematic']['y']} ${head_kinematics['head_camera_mounting_point']['kinematic']['z']}"
+        rpy="${head_kinematics['head_camera_mounting_point']['kinematic']['roll']} ${head_kinematics['head_camera_mounting_point']['kinematic']['pitch']} ${head_kinematics['head_camera_mounting_point']['kinematic']['yaw']}"/>
+    </joint>
+
+  </xacro:macro>
+</robot>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="mfr3duo_zed_mini" params="parent prefix xyz:='0 0 0' rpy:='0 0 0'">
+    <link name="${prefix}zed_mini_link">
+      <visual>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/zed_mini/visual/zedm.stl"/></geometry>
+        <material name="mfr3duo_sensor_black"/>
+      </visual>
+    </link>
+    <joint name="${prefix}zed_mini_joint" type="fixed">
+      <parent link="${parent}"/><child link="${prefix}zed_mini_link"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+    <xacro:macro name="mfr3duo_zed_frame" params="name frame_xyz:='0 0 0'">
+      <link name="${prefix}zed_mini_${name}_camera_frame"/>
+      <joint name="${prefix}zed_mini_${name}_camera_frame_joint" type="fixed">
+        <parent link="${prefix}zed_mini_link"/><child link="${prefix}zed_mini_${name}_camera_frame"/>
+        <origin xyz="${frame_xyz}"/>
+      </joint>
+      <link name="${prefix}zed_mini_${name}_camera_optical_frame"/>
+      <joint name="${prefix}zed_mini_${name}_camera_optical_frame_joint" type="fixed">
+        <parent link="${prefix}zed_mini_${name}_camera_frame"/><child link="${prefix}zed_mini_${name}_camera_optical_frame"/>
+        <origin rpy="-${pi/2} 0 -${pi/2}"/>
+      </joint>
+    </xacro:macro>
+    <xacro:mfr3duo_zed_frame name="left" frame_xyz="-0.0315 0 0"/>
+    <xacro:mfr3duo_zed_frame name="right" frame_xyz="0.0315 0 0"/>
+    <link name="${prefix}zed_mini_center_frame"/>
+    <joint name="${prefix}zed_mini_center_frame_joint" type="fixed">
+      <parent link="${prefix}zed_mini_link"/><child link="${prefix}zed_mini_center_frame"/>
+    </joint>
+  </xacro:macro>
+</robot>

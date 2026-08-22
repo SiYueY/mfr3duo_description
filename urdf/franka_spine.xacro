@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="spine_kinematics"
+    value="${franka_spine_kinematics}"/>
+
+  <!-- The spine is attached to 'parent' and provides a mounting point for other components -->
+  <xacro:macro name="franka_spine" params="parent">
+    <xacro:property name="inertials"
+      value="${franka_spine_inertials}"/>
+
+    <joint name="franka_spine_fixed_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="franka_spine"/>
+      <origin
+        xyz="${spine_kinematics['franka_spine_fixed_joint']['kinematic']['x']} ${spine_kinematics['franka_spine_fixed_joint']['kinematic']['y']} ${spine_kinematics['franka_spine_fixed_joint']['kinematic']['z']}"
+        rpy="${spine_kinematics['franka_spine_fixed_joint']['kinematic']['roll']} ${spine_kinematics['franka_spine_fixed_joint']['kinematic']['pitch']} ${spine_kinematics['franka_spine_fixed_joint']['kinematic']['yaw']}"/>
+    </joint>
+
+    <link name="franka_spine_mounting_point">
+      <xacro:franka-inertials name="franka_spine_mounting_point"/>
+    </link>
+
+    <link name="franka_spine">
+      <visual name="franka_spine_visual">
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_spine/visual/franka_spine.dae"/>
+        </geometry>
+      </visual>
+      <collision name="franka_spine_collision">
+        <geometry>
+          <mesh filename="package://mfr3duo_description/urdf/meshes/franka_spine/collision/franka_spine.stl"/>
+        </geometry>
+        <material name="red">
+          <color rgba="1 0 0 1"/>
+        </material>
+      </collision>
+      <xacro:franka-inertials name="franka_spine"/>
+    </link>
+
+    <joint name="franka_spine_vertical_joint" type="prismatic">
+      <parent link="franka_spine"/>
+      <child link="franka_spine_mounting_point"/>
+      <origin
+        xyz="${spine_kinematics['franka_spine_vertical_joint']['kinematic']['x']} ${spine_kinematics['franka_spine_vertical_joint']['kinematic']['y']} ${spine_kinematics['franka_spine_vertical_joint']['kinematic']['z']}"
+        rpy="${spine_kinematics['franka_spine_vertical_joint']['kinematic']['roll']} ${spine_kinematics['franka_spine_vertical_joint']['kinematic']['pitch']} ${spine_kinematics['franka_spine_vertical_joint']['kinematic']['yaw']}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="100" lower="0.0" upper="0.85" velocity="0.1"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>

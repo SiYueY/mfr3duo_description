@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mfr3duo">
+  <xacro:include filename="$(find mfr3duo_description)/urdf/mfr3duo.xacro"/>
+
+  <!-- Public robot-description interface. -->
+  <xacro:arg name="connected_to" default="base"/>
+  <xacro:mfr3duo connected_to="$(arg connected_to)"/>
+</robot>

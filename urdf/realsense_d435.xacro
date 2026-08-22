@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="mfr3duo_realsense_d435" params="parent prefix xyz:='0 0 0' rpy:='0 0 0'">
+    <link name="${prefix}d435_bottom_screw_frame"/>
+    <joint name="${prefix}d435_bottom_screw_frame_joint" type="fixed">
+      <parent link="${parent}"/><child link="${prefix}d435_bottom_screw_frame"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+    <link name="${prefix}d435_link">
+      <visual>
+        <origin xyz="0.0043 -0.0175 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/realsense_d435/visual/d435.dae"/></geometry>
+        <material name="mfr3duo_sensor_aluminum"/>
+      </visual>
+    </link>
+    <joint name="${prefix}d435_joint" type="fixed">
+      <parent link="${prefix}d435_bottom_screw_frame"/><child link="${prefix}d435_link"/>
+      <origin xyz="0.0057 0.0175 0.011"/>
+    </joint>
+    <xacro:macro name="mfr3duo_d435_frame" params="name frame_xyz:='0 0 0'">
+      <link name="${prefix}d435_${name}_frame"/>
+      <joint name="${prefix}d435_${name}_frame_joint" type="fixed">
+        <parent link="${prefix}d435_link"/><child link="${prefix}d435_${name}_frame"/>
+        <origin xyz="${frame_xyz}"/>
+      </joint>
+      <link name="${prefix}d435_${name}_optical_frame"/>
+      <joint name="${prefix}d435_${name}_optical_frame_joint" type="fixed">
+        <parent link="${prefix}d435_${name}_frame"/><child link="${prefix}d435_${name}_optical_frame"/>
+        <origin rpy="-${pi/2} 0 -${pi/2}"/>
+      </joint>
+    </xacro:macro>
+    <xacro:mfr3duo_d435_frame name="depth"/>
+    <xacro:mfr3duo_d435_frame name="infra1"/>
+    <xacro:mfr3duo_d435_frame name="infra2" frame_xyz="0 -0.05 0"/>
+    <xacro:mfr3duo_d435_frame name="color" frame_xyz="0 0.015 0"/>
+  </xacro:macro>
+</robot>

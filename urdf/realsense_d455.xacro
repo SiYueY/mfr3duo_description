@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="mfr3duo_realsense_d455" params="parent prefix xyz:='0 0 0' rpy:='0 0 0'">
+    <link name="${prefix}realsense_d455_link">
+      <visual>
+        <origin xyz="0.00465 -0.0475 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/realsense_d455/visual/d455.stl" scale="0.001 0.001 0.001"/></geometry>
+        <material name="mfr3duo_sensor_aluminum"/>
+      </visual>
+    </link>
+    <joint name="${prefix}realsense_d455_joint" type="fixed">
+      <parent link="${parent}"/><child link="${prefix}realsense_d455_link"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+    <xacro:macro name="mfr3duo_d455_frame" params="name frame_xyz:='0 0 0'">
+      <link name="${prefix}realsense_d455_${name}_frame"/>
+      <joint name="${prefix}realsense_d455_${name}_frame_joint" type="fixed">
+        <parent link="${prefix}realsense_d455_link"/><child link="${prefix}realsense_d455_${name}_frame"/>
+        <origin xyz="${frame_xyz}"/>
+      </joint>
+      <link name="${prefix}realsense_d455_${name}_optical_frame"/>
+      <joint name="${prefix}realsense_d455_${name}_optical_frame_joint" type="fixed">
+        <parent link="${prefix}realsense_d455_${name}_frame"/><child link="${prefix}realsense_d455_${name}_optical_frame"/>
+        <origin rpy="-${pi/2} 0 -${pi/2}"/>
+      </joint>
+    </xacro:macro>
+    <xacro:mfr3duo_d455_frame name="depth"/>
+    <xacro:mfr3duo_d455_frame name="infra1"/>
+    <xacro:mfr3duo_d455_frame name="infra2" frame_xyz="0 -0.095 0"/>
+    <xacro:mfr3duo_d455_frame name="color" frame_xyz="0 -0.059 0"/>
+  </xacro:macro>
+</robot>

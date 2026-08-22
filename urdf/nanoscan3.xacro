@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="mfr3duo_nanoscan3" params="parent prefix xyz:='0 0 0' rpy:='0 0 0'">
+    <link name="${prefix}nanoscan3_link">
+      <visual>
+        <origin xyz="-0.01 -0.08 -0.04" rpy="0 0 ${pi/2}"/>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/nanoscan3/visual/NANS3.dae"/></geometry>
+        <material name="mfr3duo_sensor_dark_gray"/>
+      </visual>
+    </link>
+    <joint name="${prefix}nanoscan3_joint" type="fixed">
+      <parent link="${parent}"/><child link="${prefix}nanoscan3_link"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+    <link name="${prefix}scan_frame"/>
+    <joint name="${prefix}scan_frame_joint" type="fixed">
+      <parent link="${prefix}nanoscan3_link"/><child link="${prefix}scan_frame"/>
+    </joint>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="mfr3duo_imu" params="parent prefix xyz:='0 0 0' rpy:='0 0 0'">
+    <link name="${prefix}imu_link">
+      <visual><geometry><box size="0.03 0.03 0.01"/></geometry></visual>
+    </link>
+    <joint name="${prefix}imu_joint" type="fixed">
+      <parent link="${parent}"/><child link="${prefix}imu_link"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+    <link name="${prefix}imu_sensor_frame"/>
+    <joint name="${prefix}imu_sensor_frame_joint" type="fixed">
+      <parent link="${prefix}imu_link"/><child link="${prefix}imu_sensor_frame"/>
+    </joint>
+  </xacro:macro>
+</robot>

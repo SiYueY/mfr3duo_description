@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Frozen Franka 2.8.1 model closure; no external description package is used. -->
+  <xacro:include filename="$(find mfr3duo_description)/urdf/franka_tmr.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/franka_spine.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/franka_head.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/franka_fr3.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/franka_hand.xacro"/>
+  <material name="mfr3duo_sensor_aluminum"><color rgba="0.23 0.23 0.23 1"/></material>
+  <material name="mfr3duo_sensor_dark_gray"><color rgba="0.2 0.2 0.2 1"/></material>
+  <material name="mfr3duo_sensor_black"><color rgba="0 0 0 1"/></material>
+  <material name="mfr3duo_printed_mount"><color rgba="0.82 0.82 0.82 1"/></material>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/imu.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/nanoscan3.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/realsense_d435.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/realsense_d455.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/zed_mini.xacro"/>
+  <xacro:include filename="$(find mfr3duo_description)/urdf/wrist_camera_mount.xacro"/>
+
+  <xacro:macro name="mfr3duo" params="connected_to:='base'">
+    <xacro:mfr3duo_mobile_base
+      hand="true"
+      ee_id="franka_hand"
+      special_connection=""
+      xyz_ee="0 0 0"
+      rpy_ee="0 0 ${-pi/4}"
+      tcp_xyz="0 0 0.1034"
+      tcp_rpy="0 0 0"
+      safety_distance="0.03"
+      with_sc="false"
+      gazebo="false"
+      reduced_version="false"
+      description_pkg="mfr3duo_description"
+      connected_to="${connected_to}"
+      use_arms="true"
+      no_prefix="false"/>
+
+    <!-- Base-mounted devices use the official mounting-point frames. -->
+    <xacro:mfr3duo_imu parent="imu_mounting_point" prefix="imu_"/>
+    <xacro:mfr3duo_realsense_d455 parent="front_mounting_point" prefix="front_" xyz="0.01115 0.0475 0.0145"/>
+    <xacro:mfr3duo_realsense_d455 parent="rear_mounting_point" prefix="rear_" xyz="0.01115 0.0475 0.0145"/>
+    <xacro:mfr3duo_nanoscan3 parent="lidar_front_mounting_point" prefix="lidar_front_" xyz="-0.0803 0.053 0" rpy="0 0 -${pi/2}"/>
+    <xacro:mfr3duo_nanoscan3 parent="lidar_rear_mounting_point" prefix="lidar_rear_" xyz="-0.0803 0.053 0" rpy="0 0 -${pi/2}"/>
+    <xacro:mfr3duo_zed_mini parent="head_camera_mounting_point" prefix="head_"/>
+
+    <!--
+      Provisional figure-fit wrist-camera assembly.  These transforms are copied
+      from the legacy assembly and must be replaced by CAD or measured calibration.
+    -->
+    <xacro:mfr3duo_wrist_camera_mount parent="left_fr3v2_1_hand" prefix="left_" xyz="-0.035 0 0"/>
+    <xacro:mfr3duo_realsense_d435 parent="left_wrist_camera_mount_link" prefix="left_" xyz="0 0 0.055" rpy="0 -${pi/2} 0"/>
+    <xacro:mfr3duo_wrist_camera_mount parent="right_fr3v2_1_hand" prefix="right_" xyz="-0.035 0 0"/>
+    <xacro:mfr3duo_realsense_d435 parent="right_wrist_camera_mount_link" prefix="right_" xyz="0 0 0.055" rpy="0 -${pi/2} 0"/>
+  </xacro:macro>
+</robot>
