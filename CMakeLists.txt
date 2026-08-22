@@ -9,6 +9,11 @@ install(
 )
 
 install(
+  DIRECTORY mjcf
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
   DIRECTORY docs
   DESTINATION share/${PROJECT_NAME}
 )

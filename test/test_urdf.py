@@ -1,4 +1,5 @@
 import os
+import importlib.util
 import subprocess
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -193,3 +194,41 @@ def test_visualization_script_and_rviz_config_are_installed():
     config_content = rviz_config.read_text()
     assert "Fixed Frame: base_link" in config_content
     assert "Value: /robot_description" in config_content
+
+
+def test_mjcf_resources_are_self_contained_and_loadable():
+    package_root = Path(__file__).parents[1]
+    mjcf_root = package_root / "mjcf"
+    components = {
+        "franka_tmr", "franka_spine", "franka_head", "franka_fr3", "franka_hand",
+        "imu", "nanoscan3", "realsense_d435", "realsense_d455",
+        "wrist_camera_mount", "zed_mini",
+    }
+    assert {path.stem for path in mjcf_root.glob("*.xml")} == components | {
+        "mfr3duo", "scene"
+    }
+    assert {path.name for path in (mjcf_root / "meshes").iterdir() if path.is_dir()} == components - {"imu"}
+
+    for xml_path in mjcf_root.glob("*.xml"):
+        content = xml_path.read_text()
+        assert "mobile_fr3_duo" not in content
+        root = ET.fromstring(content)
+        compiler = root.find("compiler")
+        meshdir = compiler.attrib.get("meshdir", ".") if compiler is not None else "."
+        for mesh in root.findall(".//mesh"):
+            if "file" in mesh.attrib:
+                assert (xml_path.parent / meshdir / mesh.attrib["file"]).is_file()
+
+    if importlib.util.find_spec("mujoco") is not None:
+        import mujoco
+
+        for name in ("mfr3duo.xml", "scene.xml"):
+            mujoco.MjModel.from_xml_path(str(mjcf_root / name))
+
+    documentation = (package_root / "docs" / "mjcf.md").read_text()
+    for source in (
+        "franka_description", "realsense-ros", "sick_safetyscanners2",
+        "zed-ros2-description", "Franka 3D Assets",
+    ):
+        assert source in documentation
+    assert "不构成模型的最终来源" in documentation

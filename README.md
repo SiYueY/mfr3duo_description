@@ -7,6 +7,9 @@ vendored, traceable Franka 2.8.1 model closure.
 See `docs/urdf.md` for the flat Xacro layout and official-model source/version
 record.
 
+The self-contained MuJoCo model is available at `mjcf/mfr3duo.xml`; see
+`docs/mjcf.md` for its usage and asset provenance.
+
 ```bash
 xacro $(ros2 pkg prefix mfr3duo_description)/share/mfr3duo_description/urdf/mfr3duo.urdf.xacro
 ```
