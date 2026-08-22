@@ -19,6 +19,40 @@ IMU 没有 Mesh。
 `mfr3duo.xml` 固定了 Mobile FR3 Duo 的 MuJoCo 装配、动力学、执行器、
 传感器和接触参数。它是 MuJoCo 资源，不作为 ROS `robot_description` 输入。
 
+## TMR 底盘控制接口
+
+TMR 底盘保持自由底座、轮地接触、caster 和 rocker arm 的被动物理行为。它的四个
+MuJoCo actuator 对齐官方 `franka_ros2` 的底层控制语义：转向关节使用位置目标，
+驱动轮使用角速度目标。
+
+| Actuator | Joint | 控制量 | 范围 |
+| --- | --- | --- | --- |
+| `tmrv0_2_joint_0_position` | `tmrv0_2_joint_0` | 前转向位置（rad） | `[-π, π]` |
+| `tmrv0_2_joint_1_velocity` | `tmrv0_2_joint_1` | 前驱动轮角速度（rad/s） | `[-20, 20]` |
+| `tmrv0_2_joint_2_position` | `tmrv0_2_joint_2` | 后转向位置（rad） | `[-π, π]` |
+| `tmrv0_2_joint_3_velocity` | `tmrv0_2_joint_3` | 后驱动轮角速度（rad/s） | `[-20, 20]` |
+
+位置伺服使用 `kp=100`，速度伺服使用 `kv=50`；四个 actuator 均限力
+`[-500, 500]`。调用方可用 `model.actuator(name).id` 写入对应 `data.ctrl`。
+若输入是底盘速度 `(vx, vy, wz)`，需在包外复用或实现官方 Swerve IK；本包不提供
+ROS 2 bridge、`/cmd_vel`、odom 或 TF。
+
+## 轮地接触基线
+
+`scene.xml` 为四个车轮分别定义了与 `ground` 的显式 contact pair。每对均使用
+`condim=6`，因此滑动、扭转与滚动摩擦都会参与求解；避免由地面与车轮 geom 的
+默认参数混合而使轮地行为不可追溯。
+
+| 参数 | 固定暂定值 | 含义 |
+| --- | --- | --- |
+| 滑动摩擦 | `1.2 1.2` | 轮胎在地面切平面两个方向的抓地能力 |
+| 扭转摩擦 | `0.005` | 接触斑块的绕法线转动阻力 |
+| 滚动摩擦 | `0.001 0.001` | 轮胎滚动的能量损失 |
+| 接触求解 | `solref="0.01 1"`、`solimp="0.9 0.95 0.001"` | 中等软硬度的稳定接触 |
+
+这些参数是可重复的 MuJoCo 基线，不是 Franka 公布的 Gazebo 或实机标定数据。若需
+与指定 Gazebo world 或实机一致，应以直行、横移、原地转向和制动测试数据标定本表。
+
 ## 最终来源
 
 | 模型 | 最终来源 | 固定版本与许可证 |

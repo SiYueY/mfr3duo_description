@@ -16,4 +16,11 @@
     <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
     <camera name="preview" pos="2.2 -1.6 1.4" xyaxes="0.6644 0.7474 0 -0.1225 0.1089 0.9865" fovy="45"/>
   </worldbody>
+  <contact>
+    <!-- Explicit wheel-ground contacts make tire friction and rolling resistance auditable. -->
+    <pair name="caster_front_left_ground" geom1="ground" geom2="caster_front_left_wheel_collision" condim="6" friction="1.2 1.2 0.005 0.001 0.001" solref="0.01 1" solimp="0.9 0.95 0.001"/>
+    <pair name="argo_drive_front_ground" geom1="ground" geom2="argo_drive_front_wheel_collision" condim="6" friction="1.2 1.2 0.005 0.001 0.001" solref="0.01 1" solimp="0.9 0.95 0.001"/>
+    <pair name="caster_rear_right_ground" geom1="ground" geom2="caster_rear_right_wheel_collision" condim="6" friction="1.2 1.2 0.005 0.001 0.001" solref="0.01 1" solimp="0.9 0.95 0.001"/>
+    <pair name="argo_drive_rear_ground" geom1="ground" geom2="argo_drive_rear_wheel_collision" condim="6" friction="1.2 1.2 0.005 0.001 0.001" solref="0.01 1" solimp="0.9 0.95 0.001"/>
+  </contact>
 </mujoco>

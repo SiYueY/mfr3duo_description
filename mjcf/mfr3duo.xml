@@ -169,7 +169,7 @@
             <joint name="caster_front_left_joint" type="hinge" axis="0 1 0" damping="0.003" frictionloss="0"/>
             <inertial pos="0 0 0" mass="0.2" fullinertia="0.0001 0.0001 0.0001 0 0 0"/>
             <geom class="visual" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0" rgba="1.0 0.5 0.0 1.0" type="cylinder" size="0.03 0.0075"/>
-            <geom class="wheel" type="cylinder" size="0.03 0.0075" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
+            <geom name="caster_front_left_wheel_collision" class="wheel" type="cylinder" size="0.03 0.0075" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
           </body>
         </body>
       </body>
@@ -184,7 +184,7 @@
             <joint name="tmrv0_2_joint_1" type="hinge" axis="0 1 0" damping="5" frictionloss="1"/>
             <inertial pos="0 0 0" mass="2.5" fullinertia="0.00189583333333 0.00189583333333 0.003125 0 0 0"/>
             <geom class="visual" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0" rgba="0.8 0.6 0.2 1.0" type="cylinder" size="0.05 0.02"/>
-            <geom class="wheel" type="cylinder" size="0.05 0.02" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
+            <geom name="argo_drive_front_wheel_collision" class="wheel" type="cylinder" size="0.05 0.02" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
           </body>
         </body>
       </body>
@@ -203,7 +203,7 @@
               <joint name="caster_rear_right_joint" type="hinge" axis="0 1 0" damping="0.003" frictionloss="0"/>
               <inertial pos="0 0 0" mass="0.2" fullinertia="0.0001 0.0001 0.0001 0 0 0"/>
               <geom class="visual" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0" rgba="1.0 0.5 0.0 1.0" type="cylinder" size="0.03 0.0075"/>
-              <geom class="wheel" type="cylinder" size="0.03 0.0075" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
+              <geom name="caster_rear_right_wheel_collision" class="wheel" type="cylinder" size="0.03 0.0075" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
             </body>
           </body>
         </body>
@@ -218,7 +218,7 @@
               <joint name="tmrv0_2_joint_3" type="hinge" axis="0 1 0" damping="5" frictionloss="1"/>
               <inertial pos="0 0 0" mass="2.5" fullinertia="0.00189583333333 0.00189583333333 0.003125 0 0 0"/>
               <geom class="visual" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0" rgba="0.8 0.6 0.2 1.0" type="cylinder" size="0.05 0.02"/>
-              <geom class="wheel" type="cylinder" size="0.05 0.02" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
+              <geom name="argo_drive_rear_wheel_collision" class="wheel" type="cylinder" size="0.05 0.02" pos="0 0 0" quat="0.7071067812 0.7071067812 0 0"/>
             </body>
           </body>
         </body>
@@ -1242,6 +1242,11 @@
     <joint name="right_hand_finger_coupling" joint1="right_fr3v2_1_finger_joint1" joint2="right_fr3v2_1_finger_joint2" polycoef="0 1 -1 0 0"/>
   </equality>
   <actuator>
+    <!-- TMR base interface matches franka_ros2: steering position, drive velocity. -->
+    <position name="tmrv0_2_joint_0_position" joint="tmrv0_2_joint_0" kp="100" ctrllimited="true" ctrlrange="-3.141592653589793 3.141592653589793" forcelimited="true" forcerange="-500 500"/>
+    <velocity name="tmrv0_2_joint_1_velocity" joint="tmrv0_2_joint_1" kv="50" ctrllimited="true" ctrlrange="-20 20" forcelimited="true" forcerange="-500 500"/>
+    <position name="tmrv0_2_joint_2_position" joint="tmrv0_2_joint_2" kp="100" ctrllimited="true" ctrlrange="-3.141592653589793 3.141592653589793" forcelimited="true" forcerange="-500 500"/>
+    <velocity name="tmrv0_2_joint_3_velocity" joint="tmrv0_2_joint_3" kv="50" ctrllimited="true" ctrlrange="-20 20" forcelimited="true" forcerange="-500 500"/>
     <motor name="franka_spine_motor" joint="franka_spine_vertical_joint" gear="1" ctrllimited="true" ctrlrange="-600 600"/>
     <motor name="left_fr3v2_1_joint1_motor" joint="left_fr3v2_1_joint1" gear="1" ctrllimited="true" ctrlrange="-87 87" forcerange="-87 87" armature="0.605721456"/>
     <motor name="left_fr3v2_1_joint2_motor" joint="left_fr3v2_1_joint2" gear="1" ctrllimited="true" ctrlrange="-87 87" forcerange="-87 87" armature="0.605721456"/>
