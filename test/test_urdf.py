@@ -234,50 +234,29 @@ def test_mjcf_resources_are_self_contained_and_loadable():
     assert "不构成模型的最终来源" in documentation
 
 
-def test_mjcf_tmr_actuators_match_official_control_interfaces():
+def test_mjcf_tmr_motor_actuators_match_joint_component():
     package_root = Path(__file__).parents[1]
-    expected = {
-        "tmrv0_2_joint_0_position": {
-            "tag": "position", "joint": "tmrv0_2_joint_0",
-            "kp": "100", "ctrlrange": "-3.141592653589793 3.141592653589793",
-        },
-        "tmrv0_2_joint_1_velocity": {
-            "tag": "velocity", "joint": "tmrv0_2_joint_1",
-            "kv": "50", "ctrlrange": "-20 20",
-        },
-        "tmrv0_2_joint_2_position": {
-            "tag": "position", "joint": "tmrv0_2_joint_2",
-            "kp": "100", "ctrlrange": "-3.141592653589793 3.141592653589793",
-        },
-        "tmrv0_2_joint_3_velocity": {
-            "tag": "velocity", "joint": "tmrv0_2_joint_3",
-            "kv": "50", "ctrlrange": "-20 20",
-        },
-    }
     for name in ("mfr3duo.xml", "franka_tmr.xml"):
         root = ET.parse(package_root / "mjcf" / name).getroot()
         actuators = root.find("actuator")
         assert actuators is not None
-        base_actuators = {
+        tmr_actuators = {
             actuator.attrib["name"]: actuator
             for actuator in actuators
             if actuator.attrib.get("joint", "").startswith("tmrv0_2_joint_")
         }
-        assert set(base_actuators) == set(expected)
-        for actuator_name, attributes in expected.items():
-            actuator = base_actuators[actuator_name]
-            assert actuator.tag == attributes["tag"]
-            for key, value in attributes.items():
-                if key != "tag":
-                    assert actuator.attrib[key] == value
+        assert set(tmr_actuators) == {
+            f"tmrv0_2_joint_{index}_motor" for index in range(4)
+        }
+        for index in range(4):
+            actuator = tmr_actuators[f"tmrv0_2_joint_{index}_motor"]
+            assert actuator.tag == "motor"
+            assert actuator.attrib["joint"] == f"tmrv0_2_joint_{index}"
+            assert actuator.attrib["gear"] == "1"
+            assert actuator.attrib["ctrllimited"] == "true"
+            assert actuator.attrib["ctrlrange"] == "-500 500"
             assert actuator.attrib["forcelimited"] == "true"
             assert actuator.attrib["forcerange"] == "-500 500"
-
-        actuated_joints = {actuator.attrib["joint"] for actuator in base_actuators.values()}
-        assert "rocker_arm_joint" not in actuated_joints
-        assert "caster_front_left_joint" not in actuated_joints
-        assert "caster_rear_right_joint" not in actuated_joints
-        assert "base_freejoint" not in actuated_joints
 
 
 def test_mjcf_tmr_drives_the_free_base_when_mujoco_is_available():
@@ -302,21 +281,31 @@ def test_mjcf_tmr_drives_the_free_base_when_mujoco_is_available():
         assert model.pair_dim[pair_id] == 6
         assert tuple(model.pair_friction[pair_id]) == (1.2, 1.2, 0.005, 0.001, 0.001)
     actuator_ids = {
-        name: model.actuator(name).id
-        for name in (
-            "tmrv0_2_joint_0_position", "tmrv0_2_joint_1_velocity",
-            "tmrv0_2_joint_2_position", "tmrv0_2_joint_3_velocity",
-        )
+        index: model.actuator(f"tmrv0_2_joint_{index}_motor").id
+        for index in range(4)
     }
-    data.ctrl[actuator_ids["tmrv0_2_joint_0_position"]] = 0.0
-    data.ctrl[actuator_ids["tmrv0_2_joint_2_position"]] = 0.0
-    data.ctrl[actuator_ids["tmrv0_2_joint_1_velocity"]] = 5.0
-    data.ctrl[actuator_ids["tmrv0_2_joint_3_velocity"]] = 5.0
+    dof_ids = {
+        index: model.jnt_dofadr[model.joint(f"tmrv0_2_joint_{index}").id]
+        for index in range(4)
+    }
+    position_ids = {
+        index: model.jnt_qposadr[model.joint(f"tmrv0_2_joint_{index}").id]
+        for index in (0, 2)
+    }
 
     free_joint_id = model.joint("base_freejoint").id
     free_qpos_address = model.jnt_qposadr[free_joint_id]
     initial_xy = data.qpos[free_qpos_address:free_qpos_address + 2].copy()
     for _ in range(1_000):
+        for index in (0, 2):
+            data.ctrl[actuator_ids[index]] = (
+                -30.0 * data.qpos[position_ids[index]]
+                - 5.0 * data.qvel[dof_ids[index]]
+            )
+        for index in (1, 3):
+            data.ctrl[actuator_ids[index]] = max(
+                -500.0, min(500.0, 2.0 * (5.0 - data.qvel[dof_ids[index]]))
+            )
         mujoco.mj_step(model, data)
 
     final_xy = data.qpos[free_qpos_address:free_qpos_address + 2]
