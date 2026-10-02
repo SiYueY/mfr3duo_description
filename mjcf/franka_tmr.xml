@@ -120,9 +120,10 @@
   </worldbody>
   <actuator>
     <!-- Mirrors franka_ros2 TMR interfaces: steering position, drive velocity. -->
-    <position name="tmrv0_2_joint_0_position" joint="tmrv0_2_joint_0" kp="100" ctrllimited="true" ctrlrange="-3.141592653589793 3.141592653589793" forcelimited="true" forcerange="-500 500"/>
-    <velocity name="tmrv0_2_joint_1_velocity" joint="tmrv0_2_joint_1" kv="50" ctrllimited="true" ctrlrange="-20 20" forcelimited="true" forcerange="-500 500"/>
-    <position name="tmrv0_2_joint_2_position" joint="tmrv0_2_joint_2" kp="100" ctrllimited="true" ctrlrange="-3.141592653589793 3.141592653589793" forcelimited="true" forcerange="-500 500"/>
-    <velocity name="tmrv0_2_joint_3_velocity" joint="tmrv0_2_joint_3" kv="50" ctrllimited="true" ctrlrange="-20 20" forcelimited="true" forcerange="-500 500"/>
+    <!-- TMR commands are converted to torque by mujoco_simulation Joint control. -->
+    <motor name="tmrv0_2_joint_0_motor" joint="tmrv0_2_joint_0" gear="1" ctrllimited="true" ctrlrange="-500 500" forcelimited="true" forcerange="-500 500"/>
+    <motor name="tmrv0_2_joint_1_motor" joint="tmrv0_2_joint_1" gear="1" ctrllimited="true" ctrlrange="-500 500" forcelimited="true" forcerange="-500 500"/>
+    <motor name="tmrv0_2_joint_2_motor" joint="tmrv0_2_joint_2" gear="1" ctrllimited="true" ctrlrange="-500 500" forcelimited="true" forcerange="-500 500"/>
+    <motor name="tmrv0_2_joint_3_motor" joint="tmrv0_2_joint_3" gear="1" ctrllimited="true" ctrlrange="-500 500" forcelimited="true" forcerange="-500 500"/>
   </actuator>
 </mujoco>

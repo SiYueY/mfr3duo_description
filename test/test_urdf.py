@@ -234,25 +234,13 @@ def test_mjcf_resources_are_self_contained_and_loadable():
     assert "不构成模型的最终来源" in documentation
 
 
-def test_mjcf_tmr_actuators_match_official_control_interfaces():
+def test_mjcf_tmr_actuators_are_unit_gear_direct_force_motors():
     package_root = Path(__file__).parents[1]
     expected = {
-        "tmrv0_2_joint_0_position": {
-            "tag": "position", "joint": "tmrv0_2_joint_0",
-            "kp": "100", "ctrlrange": "-3.141592653589793 3.141592653589793",
-        },
-        "tmrv0_2_joint_1_velocity": {
-            "tag": "velocity", "joint": "tmrv0_2_joint_1",
-            "kv": "50", "ctrlrange": "-20 20",
-        },
-        "tmrv0_2_joint_2_position": {
-            "tag": "position", "joint": "tmrv0_2_joint_2",
-            "kp": "100", "ctrlrange": "-3.141592653589793 3.141592653589793",
-        },
-        "tmrv0_2_joint_3_velocity": {
-            "tag": "velocity", "joint": "tmrv0_2_joint_3",
-            "kv": "50", "ctrlrange": "-20 20",
-        },
+        "tmrv0_2_joint_0_motor": {"joint": "tmrv0_2_joint_0"},
+        "tmrv0_2_joint_1_motor": {"joint": "tmrv0_2_joint_1"},
+        "tmrv0_2_joint_2_motor": {"joint": "tmrv0_2_joint_2"},
+        "tmrv0_2_joint_3_motor": {"joint": "tmrv0_2_joint_3"},
     }
     for name in ("mfr3duo.xml", "franka_tmr.xml"):
         root = ET.parse(package_root / "mjcf" / name).getroot()
@@ -266,10 +254,11 @@ def test_mjcf_tmr_actuators_match_official_control_interfaces():
         assert set(base_actuators) == set(expected)
         for actuator_name, attributes in expected.items():
             actuator = base_actuators[actuator_name]
-            assert actuator.tag == attributes["tag"]
+            assert actuator.tag == "motor"
             for key, value in attributes.items():
-                if key != "tag":
-                    assert actuator.attrib[key] == value
+                assert actuator.attrib[key] == value
+            assert actuator.attrib["gear"] == "1"
+            assert actuator.attrib["ctrlrange"] == "-500 500"
             assert actuator.attrib["forcelimited"] == "true"
             assert actuator.attrib["forcerange"] == "-500 500"
 
@@ -304,14 +293,14 @@ def test_mjcf_tmr_drives_the_free_base_when_mujoco_is_available():
     actuator_ids = {
         name: model.actuator(name).id
         for name in (
-            "tmrv0_2_joint_0_position", "tmrv0_2_joint_1_velocity",
-            "tmrv0_2_joint_2_position", "tmrv0_2_joint_3_velocity",
+            "tmrv0_2_joint_0_motor", "tmrv0_2_joint_1_motor",
+            "tmrv0_2_joint_2_motor", "tmrv0_2_joint_3_motor",
         )
     }
-    data.ctrl[actuator_ids["tmrv0_2_joint_0_position"]] = 0.0
-    data.ctrl[actuator_ids["tmrv0_2_joint_2_position"]] = 0.0
-    data.ctrl[actuator_ids["tmrv0_2_joint_1_velocity"]] = 5.0
-    data.ctrl[actuator_ids["tmrv0_2_joint_3_velocity"]] = 5.0
+    data.ctrl[actuator_ids["tmrv0_2_joint_0_motor"]] = 0.0
+    data.ctrl[actuator_ids["tmrv0_2_joint_2_motor"]] = 0.0
+    data.ctrl[actuator_ids["tmrv0_2_joint_1_motor"]] = 5.0
+    data.ctrl[actuator_ids["tmrv0_2_joint_3_motor"]] = 5.0
 
     free_joint_id = model.joint("base_freejoint").id
     free_qpos_address = model.jnt_qposadr[free_joint_id]

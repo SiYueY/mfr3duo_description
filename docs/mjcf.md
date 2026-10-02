@@ -21,21 +21,24 @@ IMU 没有 Mesh。
 
 ## TMR 底盘控制接口
 
-TMR 底盘保持自由底座、轮地接触、caster 和 rocker arm 的被动物理行为。它的四个
-MuJoCo actuator 对齐官方 `franka_ros2` 的底层控制语义：转向关节使用位置目标，
-驱动轮使用角速度目标。
+TMR 底盘保持自由底座、轮地接触、caster 和 rocker arm 的被动物理行为。四个主动
+关节使用 unit-gear MuJoCo `motor`，因此 `data.ctrl` 表示直接施加的关节力矩
+（N·m）。位置和速度闭环由 `mujoco_simulation` 的 Joint 组件完成：转向关节使用
+Position 模式与最短角距离误差，驱动轮使用 Velocity 模式；不要再把 MuJoCo 的
+`position` 或 `velocity` servo 与该软件控制器叠加。
 
-| Actuator | Joint | 控制量 | 范围 |
+| Actuator | Joint | `data.ctrl` | 范围 |
 | --- | --- | --- | --- |
-| `tmrv0_2_joint_0_position` | `tmrv0_2_joint_0` | 前转向位置（rad） | `[-π, π]` |
-| `tmrv0_2_joint_1_velocity` | `tmrv0_2_joint_1` | 前驱动轮角速度（rad/s） | `[-20, 20]` |
-| `tmrv0_2_joint_2_position` | `tmrv0_2_joint_2` | 后转向位置（rad） | `[-π, π]` |
-| `tmrv0_2_joint_3_velocity` | `tmrv0_2_joint_3` | 后驱动轮角速度（rad/s） | `[-20, 20]` |
+| `tmrv0_2_joint_0_motor` | `tmrv0_2_joint_0` | 前转向力矩（N·m） | `[-500, 500]` |
+| `tmrv0_2_joint_1_motor` | `tmrv0_2_joint_1` | 前驱动力矩（N·m） | `[-500, 500]` |
+| `tmrv0_2_joint_2_motor` | `tmrv0_2_joint_2` | 后转向力矩（N·m） | `[-500, 500]` |
+| `tmrv0_2_joint_3_motor` | `tmrv0_2_joint_3` | 后驱动力矩（N·m） | `[-500, 500]` |
 
-位置伺服使用 `kp=100`，速度伺服使用 `kv=50`；四个 actuator 均限力
-`[-500, 500]`。调用方可用 `model.actuator(name).id` 写入对应 `data.ctrl`。
-若输入是底盘速度 `(vx, vy, wz)`，需在包外复用或实现官方 Swerve IK；本包不提供
-ROS 2 bridge、`/cmd_vel`、odom 或 TF。
+四个 motor 的 `gear="1"`，并同时限 ctrl 与力矩为 `[-500, 500]`。仅在直接使用
+MuJoCo API 时才应通过 `model.actuator(name).id` 写入力矩；使用
+`mujoco_simulation` 时应经由 JointCommand 写入位置或速度目标。若输入是底盘速度
+`(vx, vy, wz)`，需在包外复用或实现官方 Swerve IK；本包不提供 ROS 2 bridge、
+`/cmd_vel`、odom 或 TF。
 
 ## 轮地接触基线
 
