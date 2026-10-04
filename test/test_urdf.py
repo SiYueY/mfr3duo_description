@@ -258,6 +258,12 @@ def test_mjcf_tmr_motor_actuators_match_joint_component():
             assert actuator.attrib["forcelimited"] == "true"
             assert actuator.attrib["forcerange"] == "-500 500"
 
+        actuated_joints = {actuator.attrib["joint"] for actuator in tmr_actuators.values()}
+        assert not actuated_joints.intersection({
+            "rocker_arm_joint", "caster_front_left_joint",
+            "caster_rear_right_joint", "base_freejoint",
+        })
+
 
 def test_mjcf_tmr_drives_the_free_base_when_mujoco_is_available():
     if importlib.util.find_spec("mujoco") is None:
