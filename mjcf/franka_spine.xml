@@ -40,7 +40,7 @@
       <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="franka_spine_visual_5" material="dae_Material_Plastic__2_9cede6a04e"/>
       <geom class="collision" type="mesh" mesh="franka_spine_collision" pos="0 0 0" quat="1 0 0 0"/>
       <body name="franka_spine_mounting_point" pos="0.266711 0 0.1" quat="1 0 0 0">
-        <joint name="franka_spine_vertical_joint" type="slide" axis="0 0 1" limited="true" range="0 0.85"/>
+        <joint name="franka_spine_vertical_joint" type="slide" axis="0 0 1" limited="true" margin="0.001" solreflimit="0.002 1" range="0 0.85"/>
         <inertial pos="0 0 0" mass="0.01" fullinertia="0.0001 0.0001 0.0001 0 0 0"/>
         <site name="franka_spine_mounting_point" size="0.002"/>
       </body>

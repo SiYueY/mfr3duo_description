@@ -10,6 +10,9 @@
     <default class="collision">
       <geom group="3" contype="1" conaffinity="1" condim="3" friction="1.0 0.005 0.0001" density="0"/>
     </default>
+    <default class="self_collision">
+      <geom group="3" contype="2" conaffinity="2" condim="3" friction="1.0 0.005 0.0001" density="0"/>
+    </default>
     <default class="wheel">
       <geom group="3" contype="1" conaffinity="1" condim="3" friction="1.2 0.005 0.0001" density="0"/>
     </default>
@@ -346,9 +349,9 @@
                     <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link0_visual_10" material="dae_EUT_77e3209863"/>
                     <geom class="collision" type="mesh" mesh="link0_collision" pos="0 0 0" quat="1 0 0 0"/>
                     <body name="left_fr3v2_1_link0_sc" pos="0 0 0" quat="1 0 0 0">
-                      <geom class="collision" type="cylinder" size="0.09 0.015" pos="-0.075 0 0.06" quat="0.7071067812 0 0.7071067812 0"/>
-                      <geom class="collision" type="sphere" size="0.09" pos="-0.06 0 0.06" quat="1 0 0 0"/>
-                      <geom class="collision" type="sphere" size="0.09" pos="-0.09 0 0.06" quat="1 0 0 0"/>
+                      <geom class="self_collision" type="cylinder" size="0.09 0.015" pos="-0.075 0 0.06" quat="0.7071067812 0 0.7071067812 0"/>
+                      <geom class="self_collision" type="sphere" size="0.09" pos="-0.06 0 0.06" quat="1 0 0 0"/>
+                      <geom class="self_collision" type="sphere" size="0.09" pos="-0.09 0 0.06" quat="1 0 0 0"/>
                     </body>
                     <body name="left_fr3v2_1_link0_accelerometer_top" pos="-0.017402 -0.007872 0.04715" quat="-3.673205103e-06 1 0 0"/>
                     <body name="left_fr3v2_1_link0_accelerometer_bottom" pos="-0.019739 0.0015506 0.05075" quat="0.7071054825 0 0 -0.7071080799"/>
@@ -361,9 +364,9 @@
                       <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link1_visual_3" material="dae_Axis_Number_c76ade3a84"/>
                       <geom class="collision" type="mesh" mesh="link1_collision" pos="0 0 0" quat="1 0 0 0"/>
                       <body name="left_fr3v2_1_link1_sc" pos="0 0 0" quat="1 0 0 0">
-                        <geom class="collision" type="cylinder" size="0.09 0.1415" pos="0 0 -0.1915" quat="1 0 0 0"/>
-                        <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.05" quat="1 0 0 0"/>
-                        <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.333" quat="1 0 0 0"/>
+                        <geom class="self_collision" type="cylinder" size="0.09 0.1415" pos="0 0 -0.1915" quat="1 0 0 0"/>
+                        <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.05" quat="1 0 0 0"/>
+                        <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.333" quat="1 0 0 0"/>
                       </body>
                       <body name="left_fr3v2_1_link1_accelerometer_top" pos="0.017402 -0.093352 -0.00787" quat="-2.597343467e-06 2.597353008e-06 -0.7071080799 0.7071054825"/>
                       <body name="left_fr3v2_1_link1_accelerometer_bottom" pos="0.01974 -0.08975 0.00155" quat="0.4999981634 -0.5 0.5 0.5000018366"/>
@@ -376,9 +379,9 @@
                         <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link2_visual_3" material="dae_Axis_Number_496a271997"/>
                         <geom class="collision" type="mesh" mesh="link2_collision" pos="0 0 0" quat="1 0 0 0"/>
                         <body name="left_fr3v2_1_link2_sc" pos="0 0 0" quat="1 0 0 0">
-                          <geom class="collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
-                          <geom class="collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
-                          <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
+                          <geom class="self_collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
+                          <geom class="self_collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
+                          <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
                         </body>
                         <body name="left_fr3v2_1_link2_accelerometer_top" pos="0.017403 -0.11515 0.00787" quat="-2.597343467e-06 -2.597353008e-06 0.7071080799 0.7071054825"/>
                         <body name="left_fr3v2_1_link2_accelerometer_bottom" pos="0.019737 -0.11875 -0.00155" quat="0.4999981634 0.5 -0.5 0.5000018366"/>
@@ -391,9 +394,9 @@
                           <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link3_visual_3" material="dae_Axis_Number_496a271997"/>
                           <geom class="collision" type="mesh" mesh="link3_collision" pos="0 0 0" quat="1 0 0 0"/>
                           <body name="left_fr3v2_1_link3_sc" pos="0 0 0" quat="1 0 0 0">
-                            <geom class="collision" type="cylinder" size="0.09 0.075" pos="0 0 -0.145" quat="1 0 0 0"/>
-                            <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.07" quat="1 0 0 0"/>
-                            <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.22" quat="1 0 0 0"/>
+                            <geom class="self_collision" type="cylinder" size="0.09 0.075" pos="0 0 -0.145" quat="1 0 0 0"/>
+                            <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.07" quat="1 0 0 0"/>
+                            <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.22" quat="1 0 0 0"/>
                           </body>
                           <body name="left_fr3v2_1_link3_accelerometer_top" pos="0.065099 0.077352 -0.00787" quat="0.7071054825 -0.7071080799 0 0"/>
                           <body name="left_fr3v2_1_link3_accelerometer_bottom" pos="0.062769 0.073756 0.00155" quat="0.4999981634 0.5 0.5 -0.5000018366"/>
@@ -406,9 +409,9 @@
                             <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link4_visual_3" material="dae_Axis_Number_496a271997"/>
                             <geom class="collision" type="mesh" mesh="link4_collision" pos="0 0 0" quat="1 0 0 0"/>
                             <body name="left_fr3v2_1_link4_sc" pos="0 0 0" quat="1 0 0 0">
-                              <geom class="collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
-                              <geom class="collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
-                              <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
+                              <geom class="self_collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
+                              <geom class="self_collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
+                              <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
                             </body>
                             <body name="left_fr3v2_1_link4_accelerometer_top" pos="-0.0651 0.046152 -0.00787" quat="-2.597343467e-06 2.597353008e-06 0.7071080799 -0.7071054825"/>
                             <body name="left_fr3v2_1_link4_accelerometer_bottom" pos="-0.062775 0.049753 0.00155" quat="0.4999981634 -0.5 0.5 0.5000018366"/>
@@ -422,12 +425,12 @@
                               <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link5_visual_4" material="dae_Axis_Number_496a271997"/>
                               <geom class="collision" type="mesh" mesh="link5_collision" pos="0 0 0" quat="1 0 0 0"/>
                               <body name="left_fr3v2_1_link5_sc" pos="0 0 0" quat="1 0 0 0">
-                                <geom class="collision" type="cylinder" size="0.09 0.05" pos="0 0 -0.26" quat="1 0 0 0"/>
-                                <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.21" quat="1 0 0 0"/>
-                                <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.31" quat="1 0 0 0"/>
-                                <geom class="collision" type="cylinder" size="0.055 0.07" pos="0 0.08 -0.13" quat="0.9992001067 0 0 0.03998933419"/>
-                                <geom class="collision" type="sphere" size="0.055" pos="0 0.08 -0.06" quat="1 0 0 0"/>
-                                <geom class="collision" type="sphere" size="0.055" pos="0 0.08 -0.2" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="cylinder" size="0.09 0.05" pos="0 0 -0.26" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.21" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.31" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="cylinder" size="0.055 0.07" pos="0 0.08 -0.13" quat="0.9992001067 0 0 0.03998933419"/>
+                                <geom class="self_collision" type="sphere" size="0.055" pos="0 0.08 -0.06" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="sphere" size="0.055" pos="0 0.08 -0.2" quat="1 0 0 0"/>
                               </body>
                               <body name="left_fr3v2_1_link5_accelerometer_top" pos="-0.017363 0.085872 -0.00795" quat="0.7071054825 -0.7071080799 0 0"/>
                               <body name="left_fr3v2_1_link5_accelerometer_bottom" pos="-0.019742 0.082275 0.00146" quat="0.4999981634 0.5 0.5 -0.5000018366"/>
@@ -447,9 +450,9 @@
                                 <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link6_visual_10" material="dae_Axis_Number_496a271997"/>
                                 <geom class="collision" type="mesh" mesh="link6_collision" pos="0 0 0" quat="1 0 0 0"/>
                                 <body name="left_fr3v2_1_link6_sc" pos="0 0 0" quat="1 0 0 0">
-                                  <geom class="collision" type="cylinder" size="0.08 0.04" pos="0 0 -0.03" quat="1 0 0 0"/>
-                                  <geom class="collision" type="sphere" size="0.08" pos="0 0 0.01" quat="1 0 0 0"/>
-                                  <geom class="collision" type="sphere" size="0.08" pos="0 0 -0.07" quat="1 0 0 0"/>
+                                  <geom class="self_collision" type="cylinder" size="0.08 0.04" pos="0 0 -0.03" quat="1 0 0 0"/>
+                                  <geom class="self_collision" type="sphere" size="0.08" pos="0 0 0.01" quat="1 0 0 0"/>
+                                  <geom class="self_collision" type="sphere" size="0.08" pos="0 0 -0.07" quat="1 0 0 0"/>
                                 </body>
                                 <body name="left_fr3v2_1_link7" pos="0.088 0 0" quat="0.7071067812 0.7071067812 0 0">
                                   <joint name="left_fr3v2_1_joint7" type="hinge" axis="0 0 1" limited="true" range="-3.05083335 3.05083335" damping="0.003" frictionloss="0.2"/>
@@ -463,12 +466,12 @@
                                   <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link7_visual_6" material="dae_Shell_White_1bf779d349"/>
                                   <geom class="collision" type="mesh" mesh="link7_collision" pos="0 0 0" quat="1 0 0 0"/>
                                   <body name="left_fr3v2_1_link7_sc" pos="0 0 0" quat="0.9238795325 0 0 0.3826834324">
-                                    <geom class="collision" type="cylinder" size="0.07 0.07" pos="0 0 0.01" quat="1 0 0 0"/>
-                                    <geom class="collision" type="sphere" size="0.07" pos="0 0 0.08" quat="1 0 0 0"/>
-                                    <geom class="collision" type="sphere" size="0.07" pos="0 0 -0.06" quat="1 0 0 0"/>
-                                    <geom class="collision" type="cylinder" size="0.06 0.005" pos="0.06 0 0.082" quat="0.7071067812 0 0.7071067812 0"/>
-                                    <geom class="collision" type="sphere" size="0.06" pos="0.065 0 0.082" quat="1 0 0 0"/>
-                                    <geom class="collision" type="sphere" size="0.06" pos="0.055 0 0.082" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="cylinder" size="0.07 0.07" pos="0 0 0.01" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.07" pos="0 0 0.08" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.07" pos="0 0 -0.06" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="cylinder" size="0.06 0.005" pos="0.06 0 0.082" quat="0.7071067812 0 0.7071067812 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.06" pos="0.065 0 0.082" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.06" pos="0.055 0 0.082" quat="1 0 0 0"/>
                                   </body>
                                   <body name="left_fr3v2_1_link8" pos="0 0 0.107" quat="1 0 0 0">
                                     <body name="left_fr3v2_1_hand" pos="0 0 0" quat="0.9238795325 0 0 -0.3826834324">
@@ -480,12 +483,12 @@
                                       <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="hand_visual_4" material="dae_Part__Feature005_001_005_001_bdaff437a0"/>
                                       <geom class="collision" type="mesh" mesh="hand_collision" pos="0 0 0" quat="1 0 0 0"/>
                                       <body name="left_fr3v2_1_hand_sc" pos="0 0 0" quat="1 0 0 0">
-                                        <geom class="collision" type="cylinder" size="0.07 0.05" pos="0 0 0.04" quat="0.7071067812 0.7071067812 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.07" pos="0 0.05 0.04" quat="1 0 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.07" pos="0 -0.05 0.04" quat="1 0 0 0"/>
-                                        <geom class="collision" type="cylinder" size="0.05 0.05" pos="0 0 0.1" quat="0.7071067812 0.7071067812 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.05" pos="0 0.05 0.1" quat="1 0 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.05" pos="0 -0.05 0.1" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="cylinder" size="0.07 0.05" pos="0 0 0.04" quat="0.7071067812 0.7071067812 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.07" pos="0 0.05 0.04" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.07" pos="0 -0.05 0.04" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="cylinder" size="0.05 0.05" pos="0 0 0.1" quat="0.7071067812 0.7071067812 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.05" pos="0 0.05 0.1" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.05" pos="0 -0.05 0.1" quat="1 0 0 0"/>
                                       </body>
                                       <body name="left_fr3v2_1_hand_tcp" pos="0 0 0.1034" quat="1 0 0 0">
                                         <site name="left_fr3v2_1_hand_tcp" size="0.002"/>
@@ -554,9 +557,9 @@
                     <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link0_visual_10" material="dae_EUT_77e3209863"/>
                     <geom class="collision" type="mesh" mesh="link0_collision" pos="0 0 0" quat="1 0 0 0"/>
                     <body name="right_fr3v2_1_link0_sc" pos="0 0 0" quat="1 0 0 0">
-                      <geom class="collision" type="cylinder" size="0.09 0.015" pos="-0.075 0 0.06" quat="0.7071067812 0 0.7071067812 0"/>
-                      <geom class="collision" type="sphere" size="0.09" pos="-0.06 0 0.06" quat="1 0 0 0"/>
-                      <geom class="collision" type="sphere" size="0.09" pos="-0.09 0 0.06" quat="1 0 0 0"/>
+                      <geom class="self_collision" type="cylinder" size="0.09 0.015" pos="-0.075 0 0.06" quat="0.7071067812 0 0.7071067812 0"/>
+                      <geom class="self_collision" type="sphere" size="0.09" pos="-0.06 0 0.06" quat="1 0 0 0"/>
+                      <geom class="self_collision" type="sphere" size="0.09" pos="-0.09 0 0.06" quat="1 0 0 0"/>
                     </body>
                     <body name="right_fr3v2_1_link0_accelerometer_top" pos="-0.017402 -0.007872 0.04715" quat="-3.673205103e-06 1 0 0"/>
                     <body name="right_fr3v2_1_link0_accelerometer_bottom" pos="-0.019739 0.0015506 0.05075" quat="0.7071054825 0 0 -0.7071080799"/>
@@ -569,9 +572,9 @@
                       <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link1_visual_3" material="dae_Axis_Number_c76ade3a84"/>
                       <geom class="collision" type="mesh" mesh="link1_collision" pos="0 0 0" quat="1 0 0 0"/>
                       <body name="right_fr3v2_1_link1_sc" pos="0 0 0" quat="1 0 0 0">
-                        <geom class="collision" type="cylinder" size="0.09 0.1415" pos="0 0 -0.1915" quat="1 0 0 0"/>
-                        <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.05" quat="1 0 0 0"/>
-                        <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.333" quat="1 0 0 0"/>
+                        <geom class="self_collision" type="cylinder" size="0.09 0.1415" pos="0 0 -0.1915" quat="1 0 0 0"/>
+                        <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.05" quat="1 0 0 0"/>
+                        <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.333" quat="1 0 0 0"/>
                       </body>
                       <body name="right_fr3v2_1_link1_accelerometer_top" pos="0.017402 -0.093352 -0.00787" quat="-2.597343467e-06 2.597353008e-06 -0.7071080799 0.7071054825"/>
                       <body name="right_fr3v2_1_link1_accelerometer_bottom" pos="0.01974 -0.08975 0.00155" quat="0.4999981634 -0.5 0.5 0.5000018366"/>
@@ -584,9 +587,9 @@
                         <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link2_visual_3" material="dae_Axis_Number_496a271997"/>
                         <geom class="collision" type="mesh" mesh="link2_collision" pos="0 0 0" quat="1 0 0 0"/>
                         <body name="right_fr3v2_1_link2_sc" pos="0 0 0" quat="1 0 0 0">
-                          <geom class="collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
-                          <geom class="collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
-                          <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
+                          <geom class="self_collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
+                          <geom class="self_collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
+                          <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
                         </body>
                         <body name="right_fr3v2_1_link2_accelerometer_top" pos="0.017403 -0.11515 0.00787" quat="-2.597343467e-06 -2.597353008e-06 0.7071080799 0.7071054825"/>
                         <body name="right_fr3v2_1_link2_accelerometer_bottom" pos="0.019737 -0.11875 -0.00155" quat="0.4999981634 0.5 -0.5 0.5000018366"/>
@@ -599,9 +602,9 @@
                           <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link3_visual_3" material="dae_Axis_Number_496a271997"/>
                           <geom class="collision" type="mesh" mesh="link3_collision" pos="0 0 0" quat="1 0 0 0"/>
                           <body name="right_fr3v2_1_link3_sc" pos="0 0 0" quat="1 0 0 0">
-                            <geom class="collision" type="cylinder" size="0.09 0.075" pos="0 0 -0.145" quat="1 0 0 0"/>
-                            <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.07" quat="1 0 0 0"/>
-                            <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.22" quat="1 0 0 0"/>
+                            <geom class="self_collision" type="cylinder" size="0.09 0.075" pos="0 0 -0.145" quat="1 0 0 0"/>
+                            <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.07" quat="1 0 0 0"/>
+                            <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.22" quat="1 0 0 0"/>
                           </body>
                           <body name="right_fr3v2_1_link3_accelerometer_top" pos="0.065099 0.077352 -0.00787" quat="0.7071054825 -0.7071080799 0 0"/>
                           <body name="right_fr3v2_1_link3_accelerometer_bottom" pos="0.062769 0.073756 0.00155" quat="0.4999981634 0.5 0.5 -0.5000018366"/>
@@ -614,9 +617,9 @@
                             <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link4_visual_3" material="dae_Axis_Number_496a271997"/>
                             <geom class="collision" type="mesh" mesh="link4_collision" pos="0 0 0" quat="1 0 0 0"/>
                             <body name="right_fr3v2_1_link4_sc" pos="0 0 0" quat="1 0 0 0">
-                              <geom class="collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
-                              <geom class="collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
-                              <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
+                              <geom class="self_collision" type="cylinder" size="0.09 0.06" pos="0 0 0" quat="1 0 0 0"/>
+                              <geom class="self_collision" type="sphere" size="0.09" pos="0 0 0.06" quat="1 0 0 0"/>
+                              <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.06" quat="1 0 0 0"/>
                             </body>
                             <body name="right_fr3v2_1_link4_accelerometer_top" pos="-0.0651 0.046152 -0.00787" quat="-2.597343467e-06 2.597353008e-06 0.7071080799 -0.7071054825"/>
                             <body name="right_fr3v2_1_link4_accelerometer_bottom" pos="-0.062775 0.049753 0.00155" quat="0.4999981634 -0.5 0.5 0.5000018366"/>
@@ -630,12 +633,12 @@
                               <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link5_visual_4" material="dae_Axis_Number_496a271997"/>
                               <geom class="collision" type="mesh" mesh="link5_collision" pos="0 0 0" quat="1 0 0 0"/>
                               <body name="right_fr3v2_1_link5_sc" pos="0 0 0" quat="1 0 0 0">
-                                <geom class="collision" type="cylinder" size="0.09 0.05" pos="0 0 -0.26" quat="1 0 0 0"/>
-                                <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.21" quat="1 0 0 0"/>
-                                <geom class="collision" type="sphere" size="0.09" pos="0 0 -0.31" quat="1 0 0 0"/>
-                                <geom class="collision" type="cylinder" size="0.055 0.07" pos="0 0.08 -0.13" quat="0.9992001067 0 0 0.03998933419"/>
-                                <geom class="collision" type="sphere" size="0.055" pos="0 0.08 -0.06" quat="1 0 0 0"/>
-                                <geom class="collision" type="sphere" size="0.055" pos="0 0.08 -0.2" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="cylinder" size="0.09 0.05" pos="0 0 -0.26" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.21" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="sphere" size="0.09" pos="0 0 -0.31" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="cylinder" size="0.055 0.07" pos="0 0.08 -0.13" quat="0.9992001067 0 0 0.03998933419"/>
+                                <geom class="self_collision" type="sphere" size="0.055" pos="0 0.08 -0.06" quat="1 0 0 0"/>
+                                <geom class="self_collision" type="sphere" size="0.055" pos="0 0.08 -0.2" quat="1 0 0 0"/>
                               </body>
                               <body name="right_fr3v2_1_link5_accelerometer_top" pos="-0.017363 0.085872 -0.00795" quat="0.7071054825 -0.7071080799 0 0"/>
                               <body name="right_fr3v2_1_link5_accelerometer_bottom" pos="-0.019742 0.082275 0.00146" quat="0.4999981634 0.5 0.5 -0.5000018366"/>
@@ -655,9 +658,9 @@
                                 <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link6_visual_10" material="dae_Axis_Number_496a271997"/>
                                 <geom class="collision" type="mesh" mesh="link6_collision" pos="0 0 0" quat="1 0 0 0"/>
                                 <body name="right_fr3v2_1_link6_sc" pos="0 0 0" quat="1 0 0 0">
-                                  <geom class="collision" type="cylinder" size="0.08 0.04" pos="0 0 -0.03" quat="1 0 0 0"/>
-                                  <geom class="collision" type="sphere" size="0.08" pos="0 0 0.01" quat="1 0 0 0"/>
-                                  <geom class="collision" type="sphere" size="0.08" pos="0 0 -0.07" quat="1 0 0 0"/>
+                                  <geom class="self_collision" type="cylinder" size="0.08 0.04" pos="0 0 -0.03" quat="1 0 0 0"/>
+                                  <geom class="self_collision" type="sphere" size="0.08" pos="0 0 0.01" quat="1 0 0 0"/>
+                                  <geom class="self_collision" type="sphere" size="0.08" pos="0 0 -0.07" quat="1 0 0 0"/>
                                 </body>
                                 <body name="right_fr3v2_1_link7" pos="0.088 0 0" quat="0.7071067812 0.7071067812 0 0">
                                   <joint name="right_fr3v2_1_joint7" type="hinge" axis="0 0 1" limited="true" range="-3.05083335 3.05083335" damping="0.003" frictionloss="0.2"/>
@@ -671,12 +674,12 @@
                                   <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="link7_visual_6" material="dae_Shell_White_1bf779d349"/>
                                   <geom class="collision" type="mesh" mesh="link7_collision" pos="0 0 0" quat="1 0 0 0"/>
                                   <body name="right_fr3v2_1_link7_sc" pos="0 0 0" quat="0.9238795325 0 0 0.3826834324">
-                                    <geom class="collision" type="cylinder" size="0.07 0.07" pos="0 0 0.01" quat="1 0 0 0"/>
-                                    <geom class="collision" type="sphere" size="0.07" pos="0 0 0.08" quat="1 0 0 0"/>
-                                    <geom class="collision" type="sphere" size="0.07" pos="0 0 -0.06" quat="1 0 0 0"/>
-                                    <geom class="collision" type="cylinder" size="0.06 0.005" pos="0.06 0 0.082" quat="0.7071067812 0 0.7071067812 0"/>
-                                    <geom class="collision" type="sphere" size="0.06" pos="0.065 0 0.082" quat="1 0 0 0"/>
-                                    <geom class="collision" type="sphere" size="0.06" pos="0.055 0 0.082" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="cylinder" size="0.07 0.07" pos="0 0 0.01" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.07" pos="0 0 0.08" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.07" pos="0 0 -0.06" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="cylinder" size="0.06 0.005" pos="0.06 0 0.082" quat="0.7071067812 0 0.7071067812 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.06" pos="0.065 0 0.082" quat="1 0 0 0"/>
+                                    <geom class="self_collision" type="sphere" size="0.06" pos="0.055 0 0.082" quat="1 0 0 0"/>
                                   </body>
                                   <body name="right_fr3v2_1_link8" pos="0 0 0.107" quat="1 0 0 0">
                                     <body name="right_fr3v2_1_hand" pos="0 0 0" quat="0.9238795325 0 0 -0.3826834324">
@@ -688,12 +691,12 @@
                                       <geom class="visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="hand_visual_4" material="dae_Part__Feature005_001_005_001_bdaff437a0"/>
                                       <geom class="collision" type="mesh" mesh="hand_collision" pos="0 0 0" quat="1 0 0 0"/>
                                       <body name="right_fr3v2_1_hand_sc" pos="0 0 0" quat="1 0 0 0">
-                                        <geom class="collision" type="cylinder" size="0.07 0.05" pos="0 0 0.04" quat="0.7071067812 0.7071067812 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.07" pos="0 0.05 0.04" quat="1 0 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.07" pos="0 -0.05 0.04" quat="1 0 0 0"/>
-                                        <geom class="collision" type="cylinder" size="0.05 0.05" pos="0 0 0.1" quat="0.7071067812 0.7071067812 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.05" pos="0 0.05 0.1" quat="1 0 0 0"/>
-                                        <geom class="collision" type="sphere" size="0.05" pos="0 -0.05 0.1" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="cylinder" size="0.07 0.05" pos="0 0 0.04" quat="0.7071067812 0.7071067812 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.07" pos="0 0.05 0.04" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.07" pos="0 -0.05 0.04" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="cylinder" size="0.05 0.05" pos="0 0 0.1" quat="0.7071067812 0.7071067812 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.05" pos="0 0.05 0.1" quat="1 0 0 0"/>
+                                        <geom class="self_collision" type="sphere" size="0.05" pos="0 -0.05 0.1" quat="1 0 0 0"/>
                                       </body>
                                       <body name="right_fr3v2_1_hand_tcp" pos="0 0 0.1034" quat="1 0 0 0">
                                         <site name="right_fr3v2_1_hand_tcp" size="0.002"/>
