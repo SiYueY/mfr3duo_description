@@ -3,6 +3,7 @@
   <xacro:macro name="mfr3duo_imu" params="parent prefix xyz:='0 0 0' rpy:='0 0 0'">
     <link name="${prefix}imu_link">
       <visual><geometry><box size="0.03 0.03 0.01"/></geometry></visual>
+      <collision><geometry><box size="0.03 0.03 0.01"/></geometry></collision>
     </link>
     <joint name="${prefix}imu_joint" type="fixed">
       <parent link="${parent}"/><child link="${prefix}imu_link"/>

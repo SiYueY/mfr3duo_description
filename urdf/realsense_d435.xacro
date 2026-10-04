@@ -12,6 +12,10 @@
         <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/realsense_d435/visual/d435.dae"/></geometry>
         <material name="mfr3duo_sensor_aluminum"/>
       </visual>
+      <collision>
+        <origin xyz="0.0043 -0.0175 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/realsense_d435/visual/d435.dae"/></geometry>
+      </collision>
     </link>
     <joint name="${prefix}d435_joint" type="fixed">
       <parent link="${prefix}d435_bottom_screw_frame"/><child link="${prefix}d435_link"/>

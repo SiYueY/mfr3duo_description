@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<mujoco model="mfr3duo_manipulation">
+  <include file="navigation.xml"/>
+  <worldbody>
+    <geom name="grasp_table" type="box" pos=".80 .75 .46" size=".12 .12 .50" group="1" friction="1 .005 .0001"/>
+    <body name="grasp_object_box" pos=".80 .75 .985">
+      <freejoint name="grasp_object_box_joint"/>
+      <inertial pos="0 0 0" mass=".05" diaginertia=".000017083333 .000017083333 .000013333333"/>
+      <geom name="grasp_object_box_collision" type="box" size=".02 .02 .025" group="1" rgba=".8 .25 .15 1" friction="1 .005 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    </body>
+  </worldbody>
+  <contact>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_leftfinger_pad_0" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_leftfinger_pad_1" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_leftfinger_pad_2" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_leftfinger_pad_3" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_rightfinger_pad_0" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_rightfinger_pad_1" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_rightfinger_pad_2" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="left_fr3v2_1_rightfinger_pad_3" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_leftfinger_pad_0" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_leftfinger_pad_1" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_leftfinger_pad_2" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_leftfinger_pad_3" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_rightfinger_pad_0" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_rightfinger_pad_1" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_rightfinger_pad_2" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+    <pair geom1="grasp_object_box_collision" geom2="right_fr3v2_1_rightfinger_pad_3" condim="4" friction="1 1 .005 .0001 .0001" solref=".002 1" solimp=".99 .999 .0001"/>
+  </contact>
+  <keyframe>
+    <key name="manipulation_home" qpos="0 0 0.002 1 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0.0261 -1.2125 -0.607 -0.9266 0.001 0.8389 0.0281 0.035 0.035 -0.2357 -1.1902 -0.2823 -1.2111 0.3914 0.4848 -0.2972 0.035 0.035 .80 .75 .985 1 0 0 0"/>
+    <key name="task_home" qpos="-.6 .7 0.002 1 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0.0261 -1.2125 -0.607 -0.9266 0.001 0.8389 0.0281 0.035 0.035 -0.2357 -1.1902 -0.2823 -1.2111 0.3914 0.4848 -0.2972 0.035 0.035 .72 .75 .985 1 0 0 0"/>
+  </keyframe>
+</mujoco>

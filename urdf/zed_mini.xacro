@@ -6,6 +6,9 @@
         <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/zed_mini/visual/zedm.stl"/></geometry>
         <material name="mfr3duo_sensor_black"/>
       </visual>
+      <collision>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/zed_mini/visual/zedm.stl"/></geometry>
+      </collision>
     </link>
     <joint name="${prefix}zed_mini_joint" type="fixed">
       <parent link="${parent}"/><child link="${prefix}zed_mini_link"/>

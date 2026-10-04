@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<mujoco model="mfr3duo_navigation">
+  <include file="scene.xml" />
+  <worldbody>
+    <geom name="north_wall" type="box" pos="0 4.05 0.8" size="4.1 0.05 0.8" group="1" rgba="0.5 0.55 0.6 1" contype="1" conaffinity="1" />
+    <geom name="south_wall" type="box" pos="0 -4.05 0.8" size="4.1 0.05 0.8" group="1" rgba="0.5 0.55 0.6 1" contype="1" conaffinity="1" />
+    <geom name="east_wall" type="box" pos="4.05 0 0.8" size="0.05 4.0 0.8" group="1" rgba="0.5 0.55 0.6 1" contype="1" conaffinity="1" />
+    <geom name="west_wall" type="box" pos="-4.05 0 0.8" size="0.05 4.0 0.8" group="1" rgba="0.5 0.55 0.6 1" contype="1" conaffinity="1" />
+    <geom name="navigation_obstacle" type="box" pos="1.8 1.6 0.8" size="0.3 0.45 0.8" group="1" rgba="0.5 0.55 0.6 1" contype="1" conaffinity="1" />
+  </worldbody>
+</mujoco>

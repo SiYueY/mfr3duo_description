@@ -7,6 +7,10 @@
         <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/nanoscan3/visual/NANS3.dae"/></geometry>
         <material name="mfr3duo_sensor_dark_gray"/>
       </visual>
+      <collision>
+        <origin xyz="-0.01 -0.08 -0.04" rpy="0 0 ${pi/2}"/>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/nanoscan3/visual/NANS3.dae"/></geometry>
+      </collision>
     </link>
     <joint name="${prefix}nanoscan3_joint" type="fixed">
       <parent link="${parent}"/><child link="${prefix}nanoscan3_link"/>

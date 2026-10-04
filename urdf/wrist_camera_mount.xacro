@@ -7,6 +7,10 @@
         <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/wrist_camera_mount/visual/RealSenseD435_Camera_Mount.stl" scale="0.001 0.001 0.001"/></geometry>
         <material name="mfr3duo_printed_mount"/>
       </visual>
+      <collision>
+        <origin xyz="-0.024 -0.03 0"/>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/wrist_camera_mount/visual/RealSenseD435_Camera_Mount.stl" scale="0.001 0.001 0.001"/></geometry>
+      </collision>
     </link>
     <joint name="${prefix}wrist_camera_mount_joint" type="fixed">
       <parent link="${parent}"/><child link="${prefix}wrist_camera_mount_link"/>

@@ -7,6 +7,10 @@
         <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/realsense_d455/visual/d455.stl" scale="0.001 0.001 0.001"/></geometry>
         <material name="mfr3duo_sensor_aluminum"/>
       </visual>
+      <collision>
+        <origin xyz="0.00465 -0.0475 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <geometry><mesh filename="package://mfr3duo_description/urdf/meshes/realsense_d455/visual/d455.stl" scale="0.001 0.001 0.001"/></geometry>
+      </collision>
     </link>
     <joint name="${prefix}realsense_d455_joint" type="fixed">
       <parent link="${parent}"/><child link="${prefix}realsense_d455_link"/>

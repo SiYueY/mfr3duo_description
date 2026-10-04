@@ -205,7 +205,7 @@ def test_mjcf_resources_are_self_contained_and_loadable():
         "wrist_camera_mount", "zed_mini",
     }
     assert {path.stem for path in mjcf_root.glob("*.xml")} == components | {
-        "mfr3duo", "scene"
+        "mfr3duo", "scene", "navigation", "manipulation"
     }
     assert {path.name for path in (mjcf_root / "meshes").iterdir() if path.is_dir()} == components - {"imu"}
 
@@ -222,7 +222,7 @@ def test_mjcf_resources_are_self_contained_and_loadable():
     if importlib.util.find_spec("mujoco") is not None:
         import mujoco
 
-        for name in ("mfr3duo.xml", "scene.xml"):
+        for name in ("mfr3duo.xml", "scene.xml", "navigation.xml", "manipulation.xml"):
             mujoco.MjModel.from_xml_path(str(mjcf_root / name))
 
     documentation = (package_root / "docs" / "mjcf.md").read_text()
@@ -313,3 +313,66 @@ def test_mjcf_tmr_drives_the_free_base_when_mujoco_is_available():
     assert all(math.isfinite(value) for value in data.qvel)
     assert max(abs(final_xy - initial_xy)) > 1e-4
     assert abs(data.qvel[model.jnt_dofadr[model.joint("tmrv0_2_joint_1").id]]) > 1e-3
+
+
+def test_physical_links_have_collision_geometry():
+    for link in _expanded_robot().findall("link"):
+        if link.find("visual") is not None:
+            assert link.find("collision") is not None, link.attrib["name"]
+
+
+def test_manipulation_fixture_starts_without_robot_table_penetration():
+    if importlib.util.find_spec("mujoco") is None:
+        return
+    import mujoco
+    import numpy as np
+    root = Path(__file__).parents[1] / "mjcf"
+    model = mujoco.MjModel.from_xml_path(str(root / "manipulation.xml"))
+    data = mujoco.MjData(model)
+    key = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_KEY, "manipulation_home")
+    assert key >= 0
+    mujoco.mj_resetDataKeyframe(model, data, key)
+    mujoco.mj_forward(model, data)
+    body = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "grasp_object_box")
+    assert np.allclose(data.xpos[body], [.8, .75, .985], atol=1e-9)
+    assert abs(model.body_mass[body] - .05) < 1e-12
+    table = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM, "grasp_table")
+    box = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM, "grasp_object_box_collision")
+    contacts = [contact for contact in data.contact if table in (contact.geom1, contact.geom2)]
+    assert contacts
+    assert all(box in (contact.geom1, contact.geom2) for contact in contacts)
+    for side in ("left", "right"):
+        for finger in ("leftfinger", "rightfinger"):
+            for index in range(4):
+                assert mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM,
+                    f"{side}_fr3v2_1_{finger}_pad_{index}") >= 0
+
+
+def test_auxiliary_self_collision_proxies_do_not_replace_physical_environment_geometry():
+    if importlib.util.find_spec("mujoco") is None:
+        return
+    import mujoco
+    root = Path(__file__).parents[1] / "mjcf"
+    model = mujoco.MjModel.from_xml_path(str(root / "manipulation.xml"))
+    proxy_count = 0
+    for index in range(model.ngeom):
+        body_name = model.body(int(model.geom_bodyid[index])).name
+        if body_name.endswith("_sc"):
+            proxy_count += 1
+            assert model.geom_contype[index] == 2
+            assert model.geom_conaffinity[index] == 2
+    assert proxy_count == 72
+    for side in ("left", "right"):
+        hand = model.body(f"{side}_fr3v2_1_hand").id
+        physical = [index for index in range(model.ngeom)
+                    if model.geom_bodyid[index] == hand and model.geom_contype[index] == 1]
+        assert physical, "real hand collision mesh must still collide with the environment"
+        for finger in ("leftfinger", "rightfinger"):
+            for index in range(4):
+                pad = model.geom(f"{side}_fr3v2_1_{finger}_pad_{index}").id
+                assert model.geom_contype[pad] == 1
+                assert model.geom_conaffinity[pad] == 1
+    box = model.geom("grasp_object_box_collision").id
+    table = model.geom("grasp_table").id
+    assert model.geom_contype[box] == model.geom_contype[table] == 1
+    assert model.geom_conaffinity[box] == model.geom_conaffinity[table] == 1
